@@ -15,11 +15,12 @@ check_count() {
     fi
 }
 
-check_count "skills" 37 "$(find .agents/skills -mindepth 2 -maxdepth 2 -name SKILL.md | wc -l)"
+check_count "skills" 38 "$(find .agents/skills -mindepth 2 -maxdepth 2 -name SKILL.md | wc -l)"
 check_count "custom agents" 48 "$(find .codex/agents -maxdepth 1 -name '*.toml' | wc -l)"
-check_count "rules" 11 "$(find .agents/rules -maxdepth 1 -name '*.md' | wc -l)"
+check_count "rules" 12 "$(find .agents/rules -maxdepth 1 -name '*.md' | wc -l)"
 
 python3 -m json.tool .codex/hooks.json >/dev/null
+python3 -m json.tool .agents/project-layout.json >/dev/null
 
 for skill in .agents/skills/*/SKILL.md; do
     head -1 "$skill" | grep -qx -- '---' || {
@@ -34,6 +35,20 @@ if rg -n -i 'anthropic|\.claude/|CLAUDE\.md|AskUserQuestion' \
     --glob '!.git/**' --glob '!UPSTREAM-CHANGELOG.md' \
     --glob '!ADAPTATION.md' --glob '!tools/validate-toolkit.sh' .; then
     echo "ERROR: unresolved Claude-specific integration references" >&2
+    errors=$((errors + 1))
+fi
+
+if rg -n -i 'may i write|never skip a tier|\.agents/agents/|run: /start|run: /project-stage-detect|tier[^\n]*(Opus|Sonnet|Haiku)|model[^\n]*(Sonnet|Haiku)' \
+    --glob '!.git/**' --glob '!UPSTREAM-CHANGELOG.md' \
+    --glob '!tools/validate-toolkit.sh' .; then
+    echo "ERROR: stale approval, hierarchy, path, command, or model terminology" >&2
+    errors=$((errors + 1))
+fi
+
+if rg -n -i 'LLM knowledge cutoff|training data likely covers|post-LLM-cutoff' \
+    --glob '!.git/**' --glob '!UPSTREAM-CHANGELOG.md' \
+    --glob '!tools/validate-toolkit.sh' .; then
+    echo "ERROR: stale model-knowledge assumptions" >&2
     errors=$((errors + 1))
 fi
 
