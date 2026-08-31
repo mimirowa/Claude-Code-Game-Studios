@@ -5,8 +5,10 @@ paths:
 
 # Gameplay Code Rules
 
-- ALL gameplay values MUST come from external config/data files, NEVER hardcoded
-- Use delta time for ALL time-dependent calculations (frame-rate independence)
+- Put designer-tunable gameplay values in versioned configuration; named
+  algorithmic constants may remain in code
+- Use the time source owned by the relevant runtime. Deterministic simulation
+  code follows `.agents/rules/simulation-code.md`; presentation may use render delta
 - NO direct references to UI code — use events/signals for cross-system communication
 - Every gameplay system must implement a clear interface
 - State machines must have explicit transition tables with documented states

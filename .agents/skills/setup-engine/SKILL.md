@@ -1,306 +1,121 @@
 ---
 name: setup-engine
-description: "Configure the project's game engine and version. Pins the engine in AGENTS.md, detects knowledge gaps, and populates engine reference docs via WebSearch when the version is beyond the LLM's training data."
+description: "Configure and version-pin any project technology stack: engines, web frameworks, custom runtimes, Python prototypes, servers, persistence, build tools, tests, and target platforms."
 ---
 
-When this skill is invoked:
-
-## 1. Parse Arguments
-
-Three modes:
-
-- **Full spec**: `$setup-engine godot 4.6` — engine and version provided
-- **Engine only**: `$setup-engine unity` — engine provided, version will be looked up
-- **No args**: `$setup-engine` — fully guided mode (engine recommendation + version)
-
----
-
-## 2. Guided Mode (No Arguments)
-
-If no engine is specified, run an interactive engine selection process:
-
-### Check for existing game concept
-- Read `design/gdd/game-concept.md` if it exists — extract genre, scope, platform
-  targets, art style, team size, and any engine recommendation from `$brainstorm`
-- If no concept exists, inform the user:
-  > "No game concept found. Consider running `$brainstorm` first to discover what
-  > you want to build — it will also recommend an engine. Or tell me about your
-  > game and I can help you pick."
-
-### If the user wants to pick without a concept, ask:
-1. **What kind of game?** (2D, 3D, or both?)
-2. **What platforms?** (PC, mobile, console, web?)
-3. **Team size and experience?** (solo beginner, solo experienced, small team?)
-4. **Any strong language preferences?** (GDScript, C#, C++, visual scripting?)
-5. **Budget for engine licensing?** (free only, or commercial licenses OK?)
-
-### Produce a recommendation
-
-Use this decision matrix:
-
-| Factor | Godot 4 | Unity | Unreal Engine 5 |
-|--------|---------|-------|-----------------|
-| **Best for** | 2D games, small 3D, solo/small teams | Mobile, mid-scope 3D, cross-platform | AAA 3D, photorealism, large teams |
-| **Language** | GDScript (+ C#, C++ via extensions) | C# | C++ / Blueprint |
-| **Cost** | Free, MIT license | Free under revenue threshold | Free under revenue threshold, 5% royalty |
-| **Learning curve** | Gentle | Moderate | Steep |
-| **2D support** | Excellent (native) | Good (but 3D-first engine) | Possible but not ideal |
-| **3D quality ceiling** | Good (improving rapidly) | Very good | Best-in-class |
-| **Web export** | Yes (native) | Yes (limited) | No |
-| **Console export** | Via third-party | Yes (with license) | Yes |
-| **Open source** | Yes | No | Source available |
-
-Present the top 1-2 recommendations with reasoning tied to the user's answers.
-Let the user choose — never force a recommendation.
-
----
-
-## 3. Look Up Current Version
-
-Once the engine is chosen:
-
-- If version was provided, use it
-- If no version provided, use WebSearch to find the latest stable release:
-  - Search: `"[engine] latest stable version [current year]"`
-  - Confirm with the user: "The latest stable [engine] is [version]. Use this?"
-
----
-
-## 4. Update AGENTS.md Technology Stack
-
-Read `AGENTS.md` and update the Technology Stack section. Replace the
-`[CHOOSE]` placeholders with the actual values:
-
-**For Godot:**
-```markdown
-- **Engine**: Godot [version]
-- **Language**: GDScript (primary), C++ via GDExtension (performance-critical)
-- **Build System**: SCons (engine), Godot Export Templates
-- **Asset Pipeline**: Godot Import System + custom resource pipeline
-```
-
-**For Unity:**
-```markdown
-- **Engine**: Unity [version]
-- **Language**: C#
-- **Build System**: Unity Build Pipeline
-- **Asset Pipeline**: Unity Asset Import Pipeline + Addressables
-```
-
-**For Unreal:**
-```markdown
-- **Engine**: Unreal Engine [version]
-- **Language**: C++ (primary), Blueprint (gameplay prototyping)
-- **Build System**: Unreal Build Tool (UBT)
-- **Asset Pipeline**: Unreal Content Pipeline
-```
-
----
-
-## 5. Populate Technical Preferences
-
-After updating AGENTS.md, create or update `.agents/docs/technical-preferences.md` with
-engine-appropriate defaults. Read the existing template first, then fill in:
-
-### Engine & Language Section
-- Fill from the engine choice made in step 4
-
-### Naming Conventions (engine defaults)
-
-**For Godot (GDScript):**
-- Classes: PascalCase (e.g., `PlayerController`)
-- Variables/functions: snake_case (e.g., `move_speed`)
-- Signals: snake_case past tense (e.g., `health_changed`)
-- Files: snake_case matching class (e.g., `player_controller.gd`)
-- Scenes: PascalCase matching root node (e.g., `PlayerController.tscn`)
-- Constants: UPPER_SNAKE_CASE (e.g., `MAX_HEALTH`)
-
-**For Unity (C#):**
-- Classes: PascalCase (e.g., `PlayerController`)
-- Public fields/properties: PascalCase (e.g., `MoveSpeed`)
-- Private fields: _camelCase (e.g., `_moveSpeed`)
-- Methods: PascalCase (e.g., `TakeDamage()`)
-- Files: PascalCase matching class (e.g., `PlayerController.cs`)
-- Constants: PascalCase or UPPER_SNAKE_CASE
-
-**For Unreal (C++):**
-- Classes: Prefixed PascalCase (`A` for Actor, `U` for UObject, `F` for struct)
-- Variables: PascalCase (e.g., `MoveSpeed`)
-- Functions: PascalCase (e.g., `TakeDamage()`)
-- Booleans: `b` prefix (e.g., `bIsAlive`)
-- Files: Match class without prefix (e.g., `PlayerController.h`)
-
-### Remaining Sections
-- Performance Budgets: Leave as `[TO BE CONFIGURED]` with a suggestion:
-  > "Typical targets: 60fps / 16.6ms frame budget. Want to set these now?"
-- Testing: Suggest engine-appropriate framework (GUT for Godot, NUnit for Unity, etc.)
-- Forbidden Patterns / Allowed Libraries: Leave as placeholder
-
-### Collaborative Step
-Present the filled-in preferences to the user:
-> "Here are the default technical preferences for [engine]. Want to customize
-> any of these, or shall I save the defaults?"
-
-Wait for approval before writing the file.
-
----
-
-## 6. Determine Knowledge Gap
-
-Check whether the engine version is likely beyond the LLM's training data.
-
-**Known approximate coverage** (update this as models change):
-- LLM knowledge cutoff: **May 2025**
-- Godot: training data likely covers up to ~4.3
-- Unity: training data likely covers up to ~2023.x / early 6000.x
-- Unreal: training data likely covers up to ~5.3 / early 5.4
-
-Compare the user's chosen version against these baselines:
-
-- **Within training data** → `LOW RISK` — reference docs optional but recommended
-- **Near the edge** → `MEDIUM RISK` — reference docs recommended
-- **Beyond training data** → `HIGH RISK` — reference docs required
-
-Inform the user which category they're in and why.
-
----
-
-## 7. Populate Engine Reference Docs
-
-### If WITHIN training data (LOW RISK):
-
-Create a minimal `docs/engine-reference/<engine>/VERSION.md`:
-
-```markdown
-# [Engine] — Version Reference
-
-| Field | Value |
-|-------|-------|
-| **Engine Version** | [version] |
-| **Project Pinned** | [today's date] |
-| **LLM Knowledge Cutoff** | May 2025 |
-| **Risk Level** | LOW — version is within LLM training data |
-
-## Note
-
-This engine version is within the LLM's training data. Engine reference
-docs are optional but can be added later if agents suggest incorrect APIs.
-
-Run `$setup-engine refresh` to populate full reference docs at any time.
-```
-
-Do NOT create breaking-changes.md, deprecated-apis.md, etc. — they would
-add context cost with minimal value.
-
-### If BEYOND training data (MEDIUM or HIGH RISK):
-
-Create the full reference doc set by searching the web:
-
-1. **Search for the official migration/upgrade guide**:
-   - `"[engine] [old version] to [new version] migration guide"`
-   - `"[engine] [version] breaking changes"`
-   - `"[engine] [version] changelog"`
-   - `"[engine] [version] deprecated API"`
-
-2. **Fetch and extract** from official documentation:
-   - Breaking changes between each version from the training cutoff to current
-   - Deprecated APIs with replacements
-   - New features and best practices
-
-3. **Create the full reference directory**:
-   ```
-   docs/engine-reference/<engine>/
-   ├── VERSION.md              # Version pin + knowledge gap analysis
-   ├── breaking-changes.md     # Version-by-version breaking changes
-   ├── deprecated-apis.md      # "Don't use X → Use Y" tables
-   ├── current-best-practices.md  # New practices since training cutoff
-   └── modules/                # Per-subsystem references (create as needed)
-   ```
-
-4. **Populate each file** using real data from the web searches, following
-   the format established in existing reference docs. Every file must have
-   a "Last verified: [date]" header.
-
-5. **For module files**: Only create modules for subsystems where significant
-   changes occurred. Don't create empty or minimal module files.
-
----
-
-## 8. Update AGENTS.md Import
-
-Update the `@` import under "Engine Version Reference" to point to the
-correct engine:
-
-```markdown
-## Engine Version Reference
-
-@docs/engine-reference/<engine>/VERSION.md
-```
-
-If the previous import pointed to a different engine (e.g., switching from
-Godot to Unity), update it.
-
----
-
-## 9. Update Agent Instructions
-
-For the chosen engine's specialist agents, verify they have a
-"Version Awareness" section. If not, add one following the pattern in
-the existing Godot specialist agents.
-
-The section should instruct the agent to:
-1. Read `docs/engine-reference/<engine>/VERSION.md`
-2. Check deprecated APIs before suggesting code
-3. Check breaking changes for relevant version transitions
-4. Use WebSearch to verify uncertain APIs
-
----
-
-## 10. Refresh Subcommand
-
-If invoked as `$setup-engine refresh`:
-
-1. Read the existing `docs/engine-reference/<engine>/VERSION.md` to get
-   the current engine and version
-2. Use WebSearch to check for:
-   - New engine releases since last verification
-   - Updated migration guides
-   - Newly deprecated APIs
-3. Update all reference docs with new findings
-4. Update "Last verified" dates on all modified files
-5. Report what changed
-
----
-
-## 11. Output Summary
-
-After setup is complete, output:
-
-```
-Engine Setup Complete
-=====================
-Engine:          [name] [version]
-Knowledge Risk:  [LOW/MEDIUM/HIGH]
-Reference Docs:  [created/skipped]
-AGENTS.md:       [updated]
-Tech Prefs:      [created/updated]
-Agent Config:    [verified]
-
-Next Steps:
-1. Review docs/engine-reference/<engine>/VERSION.md
-2. [If from $brainstorm] Run $map-systems to decompose your concept into individual systems
-3. [If from $brainstorm] Run $design-system to author per-system GDDs (guided, section-by-section)
-4. [If from $brainstorm] Run $prototype [core-mechanic] to test the core loop
-5. [If fresh start] Run $brainstorm to discover your game concept
-6. Create your first milestone: $sprint-plan new
-```
-
----
+# Technology Stack Setup
+
+The skill keeps its established `$setup-engine` name, but it supports general
+and mixed stacks. Never assume Godot, Unity, Unreal, or any other engine is
+required.
+
+## 1. Inspect Before Asking
+
+- Read `AGENTS.md`, `.agents/docs/technical-preferences.md`, and
+  `.agents/project-layout.json`.
+- Inspect manifests, lockfiles, build scripts, CI, source roots, and existing
+  architecture notes.
+- For an imported project, report the stack already evidenced by the repository
+  and preserve it unless the task includes a migration decision.
+- Read the configured design roots for product, platform, scope, and team-size
+  constraints when those documents exist.
+
+## 2. Configure Separate Concerns
+
+Determine or explicitly mark undecided/N/A for:
+
+1. Runtime
+2. Language(s)
+3. Client/rendering framework
+4. Simulation runtime
+5. Server/backend
+6. Persistence/database
+7. Build tooling and package management
+8. Testing frameworks and commands
+9. Target platforms
+10. Whether future multiplayer is expected, ruled out, or undecided
+
+Valid choices include browser/web games, TypeScript with Phaser or PixiJS,
+custom engines, Python prototypes, headless/server applications, conventional
+engines, and mixed client/server stacks.
+
+When a choice is genuinely open, present a small number of viable options with
+tradeoffs tied to the project's constraints. Technology choice is a material
+architectural/product decision, so let the user choose. Do not ask again when
+the agreed task or existing repository already determines it.
+
+## 3. Multiplayer Readiness
+
+Ask whether future multiplayer is expected even when multiplayer is not in the
+current milestone. If it is possible or undecided, discuss proportionate seams:
+
+- simulation/domain logic separate from presentation and networking;
+- serializable commands, events, and relevant state;
+- clear ownership of simulation and persistence state;
+- deterministic or authoritative execution where the project needs it;
+- no networking dependencies inside domain rules.
+
+Do not prescribe lockstep, client/server, peer-to-peer, turn-based, real-time,
+or hybrid networking. Record the current expectation without expanding scope
+into multiplayer implementation.
+
+## 4. Pin and Verify Versions
+
+- Pin exact direct dependency and runtime versions in the stack's normal
+  manifests, lockfiles, tool-version files, or container definitions.
+- Do not guess current releases. When a version must be selected or an API is
+  version-sensitive, verify it against current official documentation.
+- Prefer primary sources: official documentation, release notes, repositories,
+  and package registries maintained by the project owner.
+- Record important compatibility, migration, deprecation, and platform notes in
+  `docs/technology-reference/<component>/` or an existing project convention.
+- Include the pinned version, source links, and last verification date.
+- Never estimate what a current or future model "probably knows," and never use
+  a model knowledge cutoff as a risk classification.
+
+`$setup-engine refresh` re-checks pinned versions and relevant official notes.
+It reports available updates and migration impact; it does not upgrade major
+versions without an agreed migration task.
+
+## 5. Configure Project Files
+
+Update, as applicable:
+
+- the concern-based Project configuration section in `AGENTS.md`;
+- `.agents/docs/technical-preferences.md`;
+- `.agents/project-layout.json` with actual source, design, test, prototype,
+  simulation, architecture, and production roots;
+- manifests, lockfiles, and tool-version files needed to make pins reproducible;
+- concise version-specific reference notes where they add durable value.
+
+Preserve existing project conventions and content. Normal in-scope file edits,
+dependency installation, commits, and pushes do not require an extra approval
+gate. Confirm destructive migrations, credentials/billing/external-service
+actions, release/deployment, scope expansion, and unresolved major stack choices.
+
+## 6. Configure Standards and Budgets
+
+Record measurable project-specific choices rather than universal mandates:
+
+- formatter, linter, naming, and public API documentation policy;
+- test commands, required suites, and quality thresholds;
+- frame, simulation, memory, allocation, network, storage, and scale budgets;
+- significant ADR criteria;
+- deterministic simulation requirements, if applicable.
+
+Leave unknown budgets explicitly unconfigured and create a follow-up task; do
+not invent a generic `2 ms`, zero-allocation, or coverage target.
+
+## 7. Report
+
+Summarize the configured concerns, exact version pins, verified sources,
+project-root mapping, multiplayer expectation, commands to build/test, unresolved
+decisions, and files changed. Suggest `$project-stage-detect`, `$sim-validate`, or
+another relevant next step based on the actual project.
 
 ## Guardrails
 
-- NEVER guess an engine version — always verify via WebSearch or user confirmation
-- NEVER overwrite existing reference docs without asking — append or update
-- If reference docs already exist for a different engine, ask before replacing
-- Always show the user what you're about to change before making AGENTS.md edits
-- If WebSearch returns ambiguous results, show the user and let them decide
+- Treat framework/engine-specific examples as examples, not the supported set.
+- Do not physically reorganize an imported repository merely to fit defaults.
+- Do not overwrite unrelated reference notes.
+- Verify ambiguous version information before encoding it.

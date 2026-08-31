@@ -7,7 +7,7 @@ When this skill is invoked:
 
 1. **Read the AGENTS.md** for project overview and standards.
 
-2. **Read the relevant agent definition** from `.agents/agents/` if a specific
+2. **Read the relevant agent definition** from `.codex/agents/` if a specific
    role is specified.
 
 3. **Scan the codebase** for the relevant area:

@@ -3,9 +3,8 @@
 ## What Is This?
 
 This is a complete Codex agent architecture for game development. It
-organizes 48 specialized AI agents into a studio hierarchy that mirrors
-real game development teams, with defined responsibilities, delegation
-rules, and coordination protocols. It includes engine-specialist agents
+organizes 48 specialized AI agents as a flexible capability roster, with defined
+responsibilities and lightweight coordination guidance. It includes specialists
 for Godot, Unity, and Unreal — each with dedicated sub-specialists for
 major engine subsystems. All design agents and templates are grounded in
 established game design theory (MDA Framework, Self-Determination Theory,
@@ -13,21 +12,12 @@ Flow State, Bartle Player Types). Use whichever engine set matches your project.
 
 ## How to Use
 
-### 1. Understand the Hierarchy
+### 1. Choose an Active Role Set
 
-There are three tiers of agents:
-
-- **Tier 1 (Opus)**: Directors who make high-level decisions
-  - `creative-director` -- vision and creative conflict resolution
-  - `technical-director` -- architecture and technology decisions
-  - `producer` -- scheduling, coordination, and risk management
-
-- **Tier 2 (Sonnet)**: Department leads who own their domain
-  - `game-designer`, `lead-programmer`, `art-director`, `audio-director`,
-    `narrative-director`, `qa-lead`, `release-manager`, `localization-lead`
-
-- **Tier 3 (Sonnet/Haiku)**: Specialists who execute within their domain
-  - Designers, programmers, artists, writers, testers, engineers
+The main Codex session can consult any specialist directly. For the current
+stage, keep a small set of continuously active roles, consult other specialists
+for bounded needs, and reserve directors/leads for useful cross-domain or
+milestone review. See `coordination-rules.md`.
 
 ### 2. Pick the Right Agent for the Job
 
@@ -80,6 +70,7 @@ Ask yourself: "What department would handle this in a real studio?"
 | `$code-review` | Reviews code for quality and architecture |
 | `$playtest-report` | Creates or analyzes playtest feedback |
 | `$balance-check` | Analyzes game balance data |
+| `$sim-validate` | Validates deterministic scenarios, replay, invariants, batches, and budgets |
 | `$sprint-plan` | Creates or updates sprint plans |
 | `$architecture-decision` | Creates an ADR |
 | `$asset-audit` | Audits assets for compliance |
@@ -98,7 +89,7 @@ Ask yourself: "What department would handle this in a real studio?"
 | `$gate-check` | Validate phase readiness (PASS/CONCERNS/FAIL) |
 | `$project-stage-detect` | Analyze project state, detect stage, identify gaps |
 | `$reverse-document` | Generate design/architecture docs from existing code |
-| `$setup-engine` | Configure engine + version, populate reference docs |
+| `$setup-engine` | Configure and pin any engine, framework, runtime, or mixed stack |
 | `$map-systems` | Decompose concept into systems, map dependencies, guide per-system GDDs |
 | `$design-system` | Guided, section-by-section GDD authoring for a single game system |
 | `$team-combat` | Orchestrate full combat team pipeline |
@@ -145,11 +136,10 @@ Templates are in `.agents/docs/templates/`:
 
 ### 5. Follow the Coordination Rules
 
-1. Work flows down the hierarchy: Directors -> Leads -> Specialists
-2. Conflicts escalate up the hierarchy
-3. Cross-department work is coordinated by the `producer`
-4. Agents do not modify files outside their domain without delegation
-5. All decisions are documented
+1. Consult the closest specialist directly for bounded work.
+2. Add reviewers in proportion to cross-domain impact and risk.
+3. Use project-defined active roles and milestone reviewers.
+4. Document significant decisions and unresolved risks.
 
 ## First Steps for a New Project
 
@@ -165,11 +155,10 @@ If you already know what you need, jump directly to the relevant path:
    - Generates 3 concepts, helps you pick one, defines core loop and pillars
    - Produces a game concept document and recommends an engine
 2. **Set up the engine** — Run `$setup-engine` (uses the brainstorm recommendation)
-   - Configures AGENTS.md, detects knowledge gaps, populates reference docs
+   - Configures AGENTS.md, pins versions, and adds useful reference notes
    - Creates `.agents/docs/technical-preferences.md` with naming conventions,
      performance budgets, and engine-specific defaults
-   - If the engine version is newer than the LLM's training data, it fetches
-     current docs from the web so agents suggest correct APIs
+   - Verifies version-sensitive APIs against current official documentation
 3. **Validate the concept** — Run `$design-review design/gdd/game-concept.md`
 4. **Decompose into systems** — Run `$map-systems` to map all systems and dependencies
 5. **Design each system** — Run `$design-system [system-name]` (or `$map-systems next`)
@@ -217,17 +206,17 @@ If you have design docs, prototypes, or code already:
 ```
 AGENTS.md                          -- Master config (read this first, ~60 lines)
 .agents/
-  skills/                          -- 37 repository skills
-  rules/                           -- 11 path-specific rule files
+  skills/                          -- 38 repository skills
+  rules/                           -- 12 path-specific rule files
   docs/
     quick-start.md                 -- This file
     technical-preferences.md       -- Project-specific standards (populated by $setup-engine)
     coding-standards.md            -- Coding and design doc standards
     coordination-rules.md          -- Agent coordination rules
     context-management.md          -- Context budgets and compaction instructions
-    review-workflow.md             -- Review and sign-off process
+    review-workflow.md             -- Proportionate review process
     directory-structure.md         -- Project directory layout
-    agent-roster.md                -- Full agent list with tiers
+    agent-roster.md                -- Full role capability list
     skills-reference.md            -- All slash commands
     rules-reference.md             -- Path-specific rules
     hooks-reference.md             -- Active hooks

@@ -9,7 +9,7 @@ Last verified: 2026-02-12 | Engine: Godot 4.6
   - Reduces export binary size for 2D-only games
   - API remains the same for both 2D and 3D
 
-### 4.3 Changes (in training data)
+### 4.3 Changes
 - **`NavigationRegion2D`**: Removed `avoidance_layers` and `constrain_avoidance` properties
 
 ## Current API Patterns

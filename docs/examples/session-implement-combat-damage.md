@@ -273,7 +273,7 @@
 **What Worked Well:**
 - Agent read design doc first, identified 7 ambiguities upfront
 - Didn't assume or guess - asked for clarification on every unclear point
-- Proposed full architecture for user approval before writing code
+- Proposed architecture for review before implementing the agreed direction
 - Incorporated user's type safety feedback immediately
 - Rules caught issues automatically and agent fixed them transparently
 - Tests written proactively following verification-driven development

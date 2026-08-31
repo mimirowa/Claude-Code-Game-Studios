@@ -19,14 +19,15 @@ Before asking anything, silently gather context so you can tailor your guidance.
 Do NOT show these results unprompted — they inform your recommendations, not
 the conversation opener.
 
-Check:
-- **Engine configured?** Read `.agents/docs/technical-preferences.md`. If the
-  Engine field contains `[TO BE CONFIGURED]`, the engine is not set.
+Check `.agents/project-layout.json` first and use its configured roots. If it is
+missing, infer roots from manifests and repository structure before falling back
+to defaults. Then check:
+- **Stack configured?** Read `.agents/docs/technical-preferences.md` and project
+  manifests. If Runtime remains `[TO BE CONFIGURED]`, setup is incomplete.
 - **Game concept exists?** Check for `design/gdd/game-concept.md`.
-- **Source code exists?** Glob for source files in `src/` (`*.gd`, `*.cs`,
-  `*.cpp`, `*.h`, `*.rs`, `*.py`, `*.js`, `*.ts`).
-- **Prototypes exist?** Check for subdirectories in `prototypes/`.
-- **Design docs exist?** Count markdown files in `design/gdd/`.
+- **Source code exists?** Scan all configured source roots language-agnostically.
+- **Prototypes exist?** Check all configured prototype roots.
+- **Design docs exist?** Check all configured design roots.
 - **Production artifacts?** Check for files in `production/sprints/` or
   `production/milestones/`.
 
@@ -98,12 +99,12 @@ The user knows what they want to make but hasn't documented it.
 
 1. Ask 2-3 follow-up questions to understand their concept:
    - What's the genre and core mechanic? (one sentence)
-   - Do they have an engine preference, or need help choosing?
+   - Do they have stack preferences, or need help choosing?
    - What's the rough scope? (jam game, small project, large project)
 2. Based on their answers, offer two paths:
    - **Formalize first**: Run `$brainstorm` to structure the concept into a
      proper game concept document with pillars, MDA analysis, and scope tiers
-   - **Jump to engine setup**: If they're confident in their concept, go
+   - **Jump to stack setup**: If they're confident in their concept, go
      straight to `$setup-engine` and write the GDD manually afterward
 3. Show the recommended path (adapted to their choice):
    - `$brainstorm` or `$setup-engine` (their pick)
@@ -119,9 +120,9 @@ The user has artifacts already. Figure out what exists and what's missing.
 
 1. Share what you found in Step 1 (now it's relevant):
    - "I can see you have [X source files / Y design docs / Z prototypes]..."
-   - "Your engine is [configured as X / not yet configured]..."
+   - "Your stack is [configured as X / not yet configured]..."
 2. Recommend running `$project-stage-detect` for a full analysis
-3. If the engine isn't configured, note that `$setup-engine` should come first
+3. If the stack isn't configured, note that `$setup-engine` should come first
 4. Show the recommended path:
    - `$project-stage-detect` — full gap analysis
    - `$setup-engine` — if not configured
@@ -151,6 +152,9 @@ once the user has a clear next action.
 
 ## Edge Cases
 
+- Ask whether future multiplayer is expected, ruled out, or undecided when the
+  project does not record it. Do not assume permanent single-player or add
+  multiplayer implementation to the current scope.
 - **User picks D but project is empty**: Gently redirect — "It looks like the
   project is a fresh template with no artifacts yet. Would Path A or B be a
   better fit?"

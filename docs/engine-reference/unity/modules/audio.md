@@ -1,7 +1,7 @@
 # Unity 6.3 — Audio Module Reference
 
 **Last verified:** 2026-02-13
-**Knowledge Gap:** Unity 6 audio mixer improvements
+**Version note:** Unity 6 audio mixer improvements
 
 ---
 

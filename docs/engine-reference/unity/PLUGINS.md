@@ -21,7 +21,7 @@ These are NOT part of the core engine but are commonly used for specific game ty
 ### ✅ Cinemachine
 - **Purpose:** Virtual camera system (dynamic cameras, cutscenes, camera blending)
 - **When to use:** 3rd person games, cinematics, complex camera behavior
-- **Knowledge Gap:** Cinemachine 3.0+ (Unity 6) has major API changes vs 2.x
+- **Version note:** Cinemachine 3.0+ (Unity 6) has major API changes vs 2.x
 - **Status:** Production-Ready
 - **Package:** `com.unity.cinemachine` (Package Manager)
 - **Detailed Docs:** [plugins/cinemachine.md](plugins/cinemachine.md)
@@ -32,7 +32,7 @@ These are NOT part of the core engine but are commonly used for specific game ty
 ### ✅ Addressables
 - **Purpose:** Advanced asset management (async loading, remote content, memory control)
 - **When to use:** Large projects, DLC, remote content delivery
-- **Knowledge Gap:** Unity 6 improvements, better performance
+- **Version note:** Unity 6 improvements, better performance
 - **Status:** Production-Ready
 - **Package:** `com.unity.addressables` (Package Manager)
 - **Detailed Docs:** [plugins/addressables.md](plugins/addressables.md)
@@ -43,7 +43,7 @@ These are NOT part of the core engine but are commonly used for specific game ty
 ### ✅ DOTS / Entities (ECS)
 - **Purpose:** Data-Oriented Technology Stack (high-performance ECS for massive scale)
 - **When to use:** Games with 1000s of entities, RTS, simulations
-- **Knowledge Gap:** Entities 1.3+ (Unity 6) is production-ready, major rewrite from 0.x
+- **Version note:** Entities 1.3+ (Unity 6) is production-ready, major rewrite from 0.x
 - **Status:** Production-Ready (as of Unity 6.3 LTS)
 - **Package:** `com.unity.entities` (Package Manager)
 - **Detailed Docs:** [plugins/dots-entities.md](plugins/dots-entities.md)
@@ -223,7 +223,7 @@ For packages NOT listed above, use the following approach when users ask:
 
 1. **WebSearch** for latest documentation: `"Unity 6.3 [package name]"`
 2. Verify if package is:
-   - Post-cutoff (beyond May 2025 training data)
+   - Version-sensitive
    - Preview vs Production-Ready
    - Still supported in Unity 6.3 LTS
 3. Optionally cache findings in `plugins/[package-name].md` for future reference
@@ -247,4 +247,4 @@ For packages NOT listed above, use the following approach when users ask:
 
 **Last Updated:** 2026-02-13
 **Engine Version:** Unity 6.3 LTS
-**LLM Knowledge Cutoff:** May 2025
+**Version policy:** verify against current official documentation

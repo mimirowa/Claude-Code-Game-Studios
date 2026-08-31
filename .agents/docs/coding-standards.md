@@ -1,25 +1,27 @@
 # Coding Standards
 
-- All game code must include doc comments on public APIs
-- Every system must have a corresponding architecture decision record in `docs/architecture/`
-- Gameplay values must be data-driven (external config), never hardcoded
-- All public methods must be unit-testable (dependency injection over singletons)
-- Commits must reference the relevant design document or task ID
-- **Verification-driven development**: Write tests first when adding gameplay systems.
-  For UI changes, verify with screenshots. Compare expected output to actual output
-  before marking work complete. Every implementation should have a way to prove it works.
+- Follow the language, formatter, linter, documentation, and testing standards
+  configured in `.agents/docs/technical-preferences.md`.
+- Prefer clear interfaces and testable seams where they improve maintainability;
+  do not impose one dependency-management pattern on every stack.
+- Keep tuning values data-driven when designers or operators need to change them.
+  Constants intrinsic to an algorithm may remain in code and should be named.
+- Add tests in proportion to risk. Bug fixes should normally include a regression
+  test; gameplay and simulation logic should have deterministic test seams.
+- Verify implementation with the most relevant automated checks, screenshots,
+  scenarios, profiling, or manual inspection before marking it complete.
+- Public API examples, allocation restrictions, coverage targets, and numeric
+  performance limits apply only when configured for the project or subsystem.
+- Create ADRs for significant architectural decisions: choices with durable,
+  cross-system consequences, meaningful alternatives, or costly reversibility.
+  Routine implementation does not require an ADR.
 
 # Design Document Standards
 
-- All design docs use Markdown
-- Each mechanic has a dedicated document in `design/gdd/`
-- Documents must include these 8 required sections:
-  1. **Overview** -- one-paragraph summary
-  2. **Player Fantasy** -- intended feeling and experience
-  3. **Detailed Rules** -- unambiguous mechanics
-  4. **Formulas** -- all math defined with variables
-  5. **Edge Cases** -- unusual situations handled
-  6. **Dependencies** -- other systems listed
-  7. **Tuning Knobs** -- configurable values identified
-  8. **Acceptance Criteria** -- testable success conditions
-- Balance values must link to their source formula or rationale
+- Use the project's configured design roots. `design/gdd/` is the default.
+- Match document depth to the feature's complexity and risk.
+- A full system specification may cover overview, player experience, rules,
+  formulas, edge cases, dependencies, tuning knobs, and acceptance criteria.
+- Smaller changes may update an existing document or task instead of creating a
+  new document.
+- Balance values should state their source, rationale, or validation method.

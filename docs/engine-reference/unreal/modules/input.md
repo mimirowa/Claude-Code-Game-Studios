@@ -1,7 +1,7 @@
 # Unreal Engine 5.7 — Input Module Reference
 
 **Last verified:** 2026-02-13
-**Knowledge Gap:** UE 5.7 uses Enhanced Input as default (legacy input deprecated)
+**Version note:** UE 5.7 uses Enhanced Input as default (legacy input deprecated)
 
 ---
 

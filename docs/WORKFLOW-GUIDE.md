@@ -3,7 +3,7 @@
 > **How to go from zero to a shipped game using the Agent Architecture.**
 >
 > This guide walks you through every phase of game development using the
-> 48-agent system, 37 repository skills, and automated hooks. It assumes you
+> 48-agent system, 38 repository skills, and automated hooks. It assumes you
 > have Codex installed and are working from the project root.
 
 ---
@@ -365,7 +365,7 @@ Agent: [After consultation] "Complete draft ready with formulas validated by
        systems-designer. The economy-designer flagged that ingredient costs
        need balancing - I've incorporated their recommendations.
 
-       May I write this to design/gdd/crafting-system.md?"
+       I will write this to design/gdd/crafting-system.md."
 
 User: "Yes"
 
@@ -1654,62 +1654,54 @@ and prepare a "known issues" post.
 
 ### "I need to do X -- which agent do I use?"
 
-| I need to... | Agent | Tier |
-|-------------|-------|------|
-| Come up with a game idea | `$brainstorm` skill | -- |
-| Design a game mechanic | `game-designer` | 2 |
-| Design specific formulas/numbers | `systems-designer` | 3 |
-| Design a game level | `level-designer` | 3 |
-| Design loot tables / economy | `economy-designer` | 3 |
-| Build world lore | `world-builder` | 3 |
-| Write dialogue | `writer` | 3 |
-| Plan the story | `narrative-director` | 2 |
-| Plan a sprint | `producer` | 1 |
-| Make a creative decision | `creative-director` | 1 |
-| Make a technical decision | `technical-director` | 1 |
-| Implement gameplay code | `gameplay-programmer` | 3 |
-| Implement core engine systems | `engine-programmer` | 3 |
-| Implement AI behavior | `ai-programmer` | 3 |
-| Implement multiplayer | `network-programmer` | 3 |
-| Implement UI | `ui-programmer` | 3 |
-| Build dev tools | `tools-programmer` | 3 |
-| Review code architecture | `lead-programmer` | 2 |
-| Create shaders / VFX | `technical-artist` | 3 |
-| Define visual style | `art-director` | 2 |
-| Define audio style | `audio-director` | 2 |
-| Design sound effects | `sound-designer` | 3 |
-| Design UX flows | `ux-designer` | 3 |
-| Write test cases | `qa-tester` | 3 |
-| Plan test strategy | `qa-lead` | 2 |
-| Profile performance | `performance-analyst` | 3 |
-| Set up CI/CD | `devops-engineer` | 3 |
-| Design analytics | `analytics-engineer` | 3 |
-| Check accessibility | `accessibility-specialist` | 3 |
-| Plan live operations | `live-ops-designer` | 3 |
-| Manage a release | `release-manager` | 2 |
-| Manage localization | `localization-lead` | 2 |
-| Prototype quickly | `prototyper` | 3 |
-| Audit security | `security-engineer` | 3 |
-| Communicate with players | `community-manager` | 3 |
-| Godot-specific help | `godot-specialist` | 3 |
-| Unity-specific help | `unity-specialist` | 3 |
-| Unreal-specific help | `unreal-specialist` | 3 |
+| I need to... | Agent |
+|-------------|-------|
+| Come up with a game idea | `$brainstorm` skill |
+| Design a game mechanic | `game-designer` |
+| Design specific formulas/numbers | `systems-designer` |
+| Design a game level | `level-designer` |
+| Design loot tables / economy | `economy-designer` |
+| Build world lore | `world-builder` |
+| Write dialogue | `writer` |
+| Plan the story | `narrative-director` |
+| Plan a sprint | `producer` |
+| Make a creative decision | `creative-director` |
+| Make a technical decision | `technical-director` |
+| Implement gameplay code | `gameplay-programmer` |
+| Implement core engine systems | `engine-programmer` |
+| Implement AI behavior | `ai-programmer` |
+| Implement multiplayer | `network-programmer` |
+| Implement UI | `ui-programmer` |
+| Build dev tools | `tools-programmer` |
+| Review code architecture | `lead-programmer` |
+| Create shaders / VFX | `technical-artist` |
+| Define visual style | `art-director` |
+| Define audio style | `audio-director` |
+| Design sound effects | `sound-designer` |
+| Design UX flows | `ux-designer` |
+| Write test cases | `qa-tester` |
+| Plan test strategy | `qa-lead` |
+| Profile performance | `performance-analyst` |
+| Set up CI/CD | `devops-engineer` |
+| Design analytics | `analytics-engineer` |
+| Check accessibility | `accessibility-specialist` |
+| Plan live operations | `live-ops-designer` |
+| Manage a release | `release-manager` |
+| Manage localization | `localization-lead` |
+| Prototype quickly | `prototyper` |
+| Audit security | `security-engineer` |
+| Communicate with players | `community-manager` |
+| Godot-specific help | `godot-specialist` |
+| Unity-specific help | `unity-specialist` |
+| Unreal-specific help | `unreal-specialist` |
 
-### Agent Hierarchy
+### Active Role Sets
 
-```
-                    creative-director / technical-director / producer
-                                         |
-          ---------------------------------------------------------------
-          |            |           |           |          |        |
-    game-designer  lead-prog  art-dir  audio-dir  narr-dir  qa-lead  release-mgr
-          |            |           |           |          |        |
-     specialists  programmers  tech-art  snd-design  writer   qa-tester  devops
-```
-
-**Escalation rule:** If two agents disagree, go up. Design conflicts go to
-`creative-director`. Technical conflicts go to `technical-director`. Scope
-conflicts go to `producer`.
+The main session may consult any relevant specialist directly. Projects choose
+which roles are continuously active, consulted for a subsystem, or milestone
+reviewers. Use leads/directors for high-impact and cross-domain review rather
+than mandatory routing. Escalate product direction and scope decisions to the
+user.
 
 ---
 
@@ -1842,9 +1834,9 @@ conflicts go to `producer`.
    The pre-compact hook saves your progress. Don't wait until you're at the
    limit.
 
-5. **Use the right tier of agent.** Don't ask `creative-director` to write a
-   shader. Don't ask `qa-tester` to make design decisions. The hierarchy
-   exists for a reason.
+5. **Use the closest relevant expertise.** Consult a shader specialist for
+   shader work and a QA specialist for test design; add leadership review only
+   when impact or risk warrants it.
 
 6. **Run `$design-review` before handing designs to programmers.** This
    catches incomplete specs early, saving rework.

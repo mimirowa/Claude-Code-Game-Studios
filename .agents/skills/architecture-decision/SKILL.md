@@ -5,15 +5,23 @@ description: "Creates an Architecture Decision Record (ADR) documenting a signif
 
 When this skill is invoked:
 
-1. **Determine the next ADR number** by scanning `docs/architecture/` for
-   existing ADRs.
+1. **Confirm this warrants an ADR**: use one for a significant, durable choice
+   with meaningful alternatives, cross-system impact, or costly reversibility.
+   Routine system implementation does not require an ADR.
 
-2. **Gather context** by reading related code and existing ADRs.
+2. **Determine the next ADR number** by scanning the architecture roots in
+   `.agents/project-layout.json` (default `docs/architecture/`).
 
-3. **Guide the user through the decision** by asking clarifying questions if
+3. **Gather context** by reading related code and existing ADRs. For architecture
+   that owns domain or simulation state, determine whether future multiplayer is
+   expected, ruled out, or undecided. Consider simulation/client separation,
+   serializable commands/events/state, authority, and persistence ownership
+   without adding multiplayer implementation to the current scope.
+
+4. **Guide the user through the decision** by asking clarifying questions if
    the title alone is not sufficient.
 
-4. **Generate the ADR** following this format:
+5. **Generate the ADR** following this format:
 
 ```markdown
 # ADR-[NNNN]: [Title]
@@ -94,4 +102,5 @@ to implement it.]
 - [Links to related design documents]
 ```
 
-5. **Save the ADR** to `docs/architecture/adr-[NNNN]-[slug].md`.
+6. **Save the ADR** to the configured architecture root as
+   `adr-[NNNN]-[slug].md`.

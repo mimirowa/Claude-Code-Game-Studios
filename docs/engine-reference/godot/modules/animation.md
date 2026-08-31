@@ -14,7 +14,7 @@ Last verified: 2026-02-12 | Engine: Godot 4.6
 - **BoneConstraint3D**: Bind bones to other bones with modifiers
   - `AimModifier3D`, `CopyTransformModifier3D`, `ConvertTransformModifier3D`
 
-### 4.3 Changes (in training data)
+### 4.3 Changes
 - **AnimationMixer**: Base class for both AnimationPlayer and AnimationTree
   - `method_call_mode` → `callback_mode_method`
   - `playback_active` → `active`

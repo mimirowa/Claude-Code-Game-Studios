@@ -21,7 +21,7 @@ These are NOT part of the core engine but are commonly used for specific game ty
 ### ✅ Gameplay Ability System (GAS)
 - **Purpose:** Modular ability system (abilities, attributes, effects, cooldowns, costs)
 - **When to use:** RPGs, MOBAs, shooters with abilities, any ability-based gameplay
-- **Knowledge Gap:** GAS stable since UE4, UE5 improvements post-cutoff
+- **Version note:** GAS stable since UE4, UE5 improvements Version-Specific
 - **Status:** Production-Ready
 - **Plugin:** `GameplayAbilities` (built-in, enable in Plugins)
 - **Detailed Docs:** [plugins/gameplay-ability-system.md](plugins/gameplay-ability-system.md)
@@ -32,7 +32,7 @@ These are NOT part of the core engine but are commonly used for specific game ty
 ### ✅ CommonUI
 - **Purpose:** Cross-platform UI framework (automatic gamepad/mouse/touch input routing)
 - **When to use:** Multi-platform games (console + PC), input-agnostic UI
-- **Knowledge Gap:** Production-ready in UE5+, major improvements post-cutoff
+- **Version note:** Production-ready in UE5+, major improvements Version-Specific
 - **Status:** Production-Ready
 - **Plugin:** `CommonUI` (built-in, enable in Plugins)
 - **Detailed Docs:** [plugins/common-ui.md](plugins/common-ui.md)
@@ -43,7 +43,7 @@ These are NOT part of the core engine but are commonly used for specific game ty
 ### ✅ Gameplay Camera System
 - **Purpose:** Modular camera management (camera modes, blending, context-aware cameras)
 - **When to use:** Games needing dynamic camera behavior (3rd person, aiming, vehicles)
-- **Knowledge Gap:** NEW in UE 5.5, completely post-cutoff
+- **Version note:** NEW in UE 5.5, completely Version-Specific
 - **Status:** ⚠️ Experimental (UE 5.5-5.7)
 - **Plugin:** `GameplayCameras` (built-in, enable in Plugins)
 - **Detailed Docs:** [plugins/gameplay-camera-system.md](plugins/gameplay-camera-system.md)
@@ -54,7 +54,7 @@ These are NOT part of the core engine but are commonly used for specific game ty
 ### ✅ PCG (Procedural Content Generation)
 - **Purpose:** Node-based procedural world generation (foliage, props, terrain details)
 - **When to use:** Open worlds, procedural levels, large-scale environment population
-- **Knowledge Gap:** Experimental in UE 5.0-5.6, production-ready in 5.7
+- **Version note:** Experimental in UE 5.0-5.6, production-ready in 5.7
 - **Status:** Production-Ready (as of UE 5.7)
 - **Plugin:** `PCG` (built-in, enable in Plugins)
 - **Detailed Docs:** [plugins/pcg.md](plugins/pcg.md)
@@ -184,7 +184,7 @@ For plugins NOT listed above, use the following approach when users ask:
 
 1. **WebSearch** for latest documentation: `"Unreal Engine 5.7 [plugin name]"`
 2. Verify if plugin is:
-   - Post-cutoff (beyond May 2025 training data)
+   - Version-sensitive
    - Experimental vs Production-Ready
    - Still supported in UE 5.7
 3. Optionally cache findings in `plugins/[plugin-name].md` for future reference
@@ -207,4 +207,4 @@ For plugins NOT listed above, use the following approach when users ask:
 
 **Last Updated:** 2026-02-13
 **Engine Version:** Unreal Engine 5.7
-**LLM Knowledge Cutoff:** May 2025
+**Version policy:** verify against current official documentation

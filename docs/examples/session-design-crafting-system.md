@@ -216,7 +216,7 @@
 > - Consulted `systems-designer` for XP curve formula validation
 > - Consulted `economy-designer` for material cost balancing
 >
-> May I write this to `design/gdd/crafting-system.md`?
+> I will write this to `design/gdd/crafting-system.md`.
 
 ## Turn 11: User Approves Writing
 
@@ -244,8 +244,8 @@
 - Presented 3 distinct options with clear pros/cons and pillar alignment
 - User's modification ("wrong tag feedback") was incorporated immediately
 - Edge case (non-recipe combos) was flagged proactively, not assumed
-- Each section was shown for approval before moving to next
-- Explicit permission requested before writing file
+- Each material section was reviewed before moving to the next
+- Agreed content was persisted without a routine write gate
 
 **Key Collaborative Moments:**
 - Turn 2: Agent asked 5 questions to understand vision
@@ -253,7 +253,7 @@
 - Turn 5: User modified recommended option, agent incorporated it
 - Turn 8: Agent caught edge case and asked rather than assuming
 - Turn 9: User's choice (procedural potions) changed design direction
-- Turn 10: Agent requested approval before writing file
+- Turn 10: Agent persisted the agreed file
 
 **Files Created:**
 - `design/gdd/crafting-system.md` (complete 8-section GDD)

@@ -14,7 +14,7 @@ Last verified: 2026-02-12 | Engine: Godot 4.6
 - **SDL3 gamepad driver**: Gamepad handling delegated to SDL library for better cross-platform support
 - **Recursive Control disable**: Single property disables mouse/focus for entire node hierarchies
 
-### 4.3 Changes (in training data)
+### 4.3 Changes
 - **InputEventShortcut**: Dedicated event type for menu shortcuts (optional)
 
 ## Current API Patterns

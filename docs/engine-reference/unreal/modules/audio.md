@@ -1,7 +1,7 @@
 # Unreal Engine 5.7 — Audio Module Reference
 
 **Last verified:** 2026-02-13
-**Knowledge Gap:** UE 5.7 MetaSounds production-ready
+**Version note:** UE 5.7 MetaSounds production-ready
 
 ---
 

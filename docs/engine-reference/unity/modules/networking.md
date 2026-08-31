@@ -1,7 +1,7 @@
 # Unity 6.3 — Networking Module Reference
 
 **Last verified:** 2026-02-13
-**Knowledge Gap:** Unity 6 uses Netcode for GameObjects (UNet deprecated)
+**Version note:** Unity 6 uses Netcode for GameObjects (UNet deprecated)
 
 ---
 

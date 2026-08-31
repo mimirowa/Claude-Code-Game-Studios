@@ -1,7 +1,7 @@
 # Unity 6.3 — Navigation Module Reference
 
 **Last verified:** 2026-02-13
-**Knowledge Gap:** Unity 6 NavMesh improvements
+**Version note:** Unity 6 NavMesh improvements
 
 ---
 

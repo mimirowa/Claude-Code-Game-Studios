@@ -1,6 +1,8 @@
 # Collaborative Session Examples
 
-This directory contains realistic, end-to-end session transcripts showing how the Game Studio Agent Architecture works in practice. Each example demonstrates the **collaborative workflow** where agents ask questions, present options, and wait for user approval rather than autonomously generating content.
+This directory contains end-to-end session transcripts showing collaborative
+workflows: agents investigate, present meaningful choices, preserve agreed work,
+and return major product, scope, or irreversible decisions to the user.
 
 ---
 
@@ -21,7 +23,7 @@ Solo dev needs to design a crafting system that serves Pillar 2 ("Emergent Disco
 - User modifies recommended option, agent incorporates immediately
 - Edge case flagged proactively ("what if non-recipe combo?")
 - Each GDD section shown for approval before moving to next
-- Explicit "May I write to [file]?" before creating file
+- Explicit "I will write the agreed file." before creating file
 
 **Learn:**
 - How design agents ask about goals, constraints, references
@@ -114,10 +116,10 @@ Question → Options → Decision → Draft → Approval
    - Architecture proposals shown before implementation
    - Strategic analysis presented before decisions
 
-4. **Agents Get Approval Before Writing Files**
-   - Explicit "May I write to [file]?" before using Write/Edit tools
+4. **Agents Confirm Material Decision Boundaries**
+   - Explicit "I will write the agreed file." before using Write/Edit tools
    - Multi-file changes list all affected files first
-   - User says "Yes" before any file is created
+   - User controls material creative and scope decisions
 
 5. **Agents Iterate on Feedback**
    - User modifications incorporated immediately
@@ -167,7 +169,7 @@ If you're teaching someone to use this system, walk through one example turn-by-
 - Flag edge cases or ambiguities proactively
 
 ### Turn 9-10: **Approval and Completion**
-- "May I write to [file]?"
+- "I will write the agreed file."
 - User: "Yes"
 - Agent writes files
 - Agent offers next steps (tests, review, integration)
@@ -184,7 +186,7 @@ After reading these examples, try this exercise:
    - ✅ Asks clarifying questions upfront
    - ✅ Presents options with reasoning
    - ✅ Shows drafts before finalizing
-   - ✅ Requests approval before writing files
+   - ✅ Writes agreed files and reports them
 
 If the agent skips any of these, remind it:
 > "Please follow the collaborative protocol from docs/COLLABORATIVE-DESIGN-PRINCIPLE.md"

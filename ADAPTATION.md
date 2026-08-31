@@ -9,10 +9,10 @@ validation scripts. Its main portability problem was that discovery,
 permissions, hooks, subagents, and tool names were encoded specifically for
 Claude Code.
 
-The original also favors approval before every write. That is useful during
-collaborative game design but unnecessarily interrupts ordinary implementation.
-The adapted root instructions reserve explicit approval for material creative
-choices, scope changes, destructive actions, commits, and publishing.
+The original also favors approval before every write. The Codex edition instead
+uses Git checkpoints for routine in-scope edits, commits, and pushes. Explicit
+confirmation remains for destructive actions, major creative/product or scope
+changes, releases/deployment, credentials, billing, and external services.
 
 ## Conversion map
 

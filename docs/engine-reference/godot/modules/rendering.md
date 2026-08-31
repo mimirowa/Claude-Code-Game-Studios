@@ -22,7 +22,7 @@ Last verified: 2026-02-12 | Engine: Godot 4.6
 - **Shader texture types**: Changed from `Texture2D` to `Texture` base type
 - **Particles `.restart()`**: Added optional `keep_seed` parameter
 
-### 4.3 Changes (in training data)
+### 4.3 Changes
 - **Compositor node**: `Compositor` + `CompositorEffect` for post-processing chains
 
 ## Current API Patterns

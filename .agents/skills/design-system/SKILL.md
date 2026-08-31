@@ -163,7 +163,7 @@ Walk through each section in order. For **each section**, follow this cycle:
 ### The Section Cycle
 
 ```
-Context  ->  Questions  ->  Options  ->  Decision  ->  Draft  ->  Approval  ->  Write
+Context  ->  Questions  ->  Options  ->  Decision  ->  Draft  ->  Review  ->  Persist
 ```
 
 1. **Context**: State what this section needs to contain, and surface any relevant
@@ -182,7 +182,7 @@ Context  ->  Questions  ->  Options  ->  Decision  ->  Draft  ->  Approval  ->  
 5. **Draft**: Write the section content in conversation text for review. Flag any
    provisional assumptions about undesigned dependencies.
 
-6. **Approval**: Ask "Approve this section, or would you like changes?"
+6. **Review**: Ask for a decision only where material creative choices remain
 
 7. **Write**: Use the Edit tool to replace the `[To be designed]` placeholder with
    the approved content. Confirm the write.
@@ -474,20 +474,21 @@ disruption.
 
 This skill follows the collaborative design principle at every step:
 
-1. **Question -> Options -> Decision -> Draft -> Approval** for every section
+1. **Question -> Options -> Decision -> Draft -> Review** for material choices
 2. **request_user_input** at every decision point (Explain -> Capture pattern):
    - Phase 2: "Ready to start, or need more context?"
    - Phase 3: "May I create the skeleton?"
-   - Phase 4 (each section): Design questions, approach options, draft approval
+   - Phase 4 (each section): Design questions, approach options, draft review
    - Phase 5: "Run design review? Update systems index? What's next?"
-3. **"May I write to [filepath]?"** before the skeleton and before each section write
-4. **Incremental writing**: Each section is written to file immediately after approval
+3. **No routine write gate**: persist agreed skeletons and sections; ask when a material creative choice remains unresolved
+4. **Incremental writing**: write each agreed section promptly to preserve decisions
 5. **Session state updates**: After every section write
 6. **Cross-referencing**: Every section checks existing GDDs for conflicts
 7. **Specialist routing**: Complex sections get expert agent input, presented to
    the user for decision — never written silently
 
 **Never** auto-generate the full GDD and present it as a fait accompli.
-**Never** write a section without user approval.
+Never invent an unresolved major creative or product decision. Persist routine
+drafting and agreed revisions without a separate write confirmation.
 **Never** contradict an existing approved GDD without flagging the conflict.
 **Always** show where decisions come from (dependency GDDs, pillars, user choices).

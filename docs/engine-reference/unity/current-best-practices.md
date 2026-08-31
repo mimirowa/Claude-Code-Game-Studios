@@ -2,7 +2,7 @@
 
 **Last verified:** 2026-02-13
 
-Modern Unity 6 patterns that may not be in the LLM's training data.
+Modern Unity 6 patterns verified for the pinned version.
 These are production-ready recommendations as of Unity 6.3 LTS.
 
 ---

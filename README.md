@@ -10,14 +10,15 @@ rules, and lifecycle checks.
 | Component | Count | Codex integration |
 |---|---:|---|
 | Custom agents | 48 | `.codex/agents/*.toml` |
-| Skills | 37 | `.agents/skills/*/SKILL.md` |
+| Skills | 38 | `.agents/skills/*/SKILL.md` |
 | Hooks | 8 | `.codex/hooks.json` and `.codex/hooks/` |
-| Path rules | 11 | Routed by `AGENTS.md` |
+| Path rules | 12 | Routed by `AGENTS.md` and project layout |
 | Templates | 29 | `.agents/docs/templates/` |
 
 The roster covers production, design, programming, art, audio, narrative, QA,
-release, accessibility, analytics, security, and specialists for Godot, Unity,
-and Unreal Engine.
+release, accessibility, analytics, security, and engine specialists. The
+framework also supports web, TypeScript, custom runtimes, Python prototypes,
+headless servers, simulations, and mixed client/server stacks.
 
 ## Requirements
 
@@ -54,6 +55,7 @@ Useful starting workflows:
 - `$design-system` — write a system design collaboratively
 - `$sprint-plan` — create an actionable sprint
 - `$code-review` — review implementation risks
+- `$sim-validate` — validate determinism, invariants, replay, batches, and budgets
 
 Codex discovers repository skills from `.agents/skills`. Custom agents can be
 used when you explicitly ask Codex to delegate or when repository instructions
@@ -78,6 +80,7 @@ AGENTS.md                 Root operating instructions
 .agents/skills/           Reusable Codex skills
 .agents/docs/             Standards, references, and templates
 .agents/rules/            Path-specific development rules
+.agents/project-layout.json Configurable roots for new and imported projects
 .codex/config.toml        Project Codex configuration
 .codex/agents/            Native custom-agent definitions
 .codex/hooks.json         Lifecycle hook registration

@@ -185,7 +185,7 @@ systems index with all data from Phases 2-4:
 - Fill the high-risk systems
 - Fill progress tracker (all systems "Not Started" initially, unless GDDs already exist)
 
-### Step 5b: Approval
+### Step 5b: Material Decision Check
 
 Present a summary of the document:
 - Total systems count by category
@@ -193,9 +193,7 @@ Present a summary of the document:
 - First 3 systems in the design order
 - Any high-risk items
 
-Ask: "May I write the systems index to `design/gdd/systems-index.md`?"
-
-Wait for approval. Write the file only after "yes."
+Write the systems index to the configured design root once its scope and substantive creative choices are agreed.
 
 ### Step 5c: Update Session State
 
@@ -270,14 +268,14 @@ the appropriate next actions:
 
 This skill follows the collaborative design principle at every phase:
 
-1. **Question -> Options -> Decision -> Draft -> Approval** at every step
+1. **Question -> Options -> Decision -> Draft -> Review** where choices matter
 2. **request_user_input** at every decision point (Explain -> Capture pattern):
    - Phase 2: "Missing systems? Combine or split?"
    - Phase 3: "Dependency ordering correct?"
    - Phase 4: "Priority assignments match your vision?"
-   - Phase 5: "May I write the systems index?"
+   - Phase 5: write the agreed systems index and summarize it
    - Phase 6: "Start designing, pick different, or stop?" then hand off to `$design-system`
-3. **"May I write to [filepath]?"** before every file write
+3. **No routine write gate**: persist agreed work; pause for material direction or scope changes
 4. **Incremental writing**: Update the systems index after each system is designed
 5. **Handoff**: Individual GDD authoring is owned by `$design-system`, which handles
    incremental section writing, cross-referencing, design review, and index updates

@@ -19,13 +19,13 @@ Agents:
 - Research and present options
 - Explain trade-offs and reasoning
 - Draft proposals for review
-- Wait for user approval before writing
+- Persist agreed work without routine file-write approval gates
 
 Users:
 - Make all creative and strategic decisions
 - Approve or reject agent suggestions
 - Direct the design vision
-- Sign off before anything is written to files
+- Own major creative, product, and scope decisions
 ```
 
 ### ❌ The Wrong Model: Autonomous Generator
@@ -33,7 +33,7 @@ Users:
 ```
 ❌ Agent creates design and writes it
 ❌ Agent makes decisions without user input
-❌ Agent writes code without approval
+❌ Agent invents major product decisions without user input
 ❌ User just says "make a game" and waits
 ```
 
@@ -43,7 +43,7 @@ Users:
 
 Every agent interaction should follow this pattern:
 
-### Pattern: Question → Options → Decision → Draft → Approval
+### Pattern: Question → Options → Decision → Draft → Review
 
 ```
 1. AGENT ASKS QUESTIONS
@@ -122,14 +122,14 @@ Every agent interaction should follow this pattern:
 
 9. [REPEAT CYCLE FOR EACH SECTION]
 
-10. FINAL APPROVAL BEFORE WRITING
+10. FINAL DIRECTION CHECK
     Agent: "The full GDD draft is complete. I've covered:
            ✓ Overview, ✓ Player Fantasy, ✓ Detailed Rules, ✓ Formulas,
            ✓ Edge Cases, ✓ Dependencies, ✓ Tuning Knobs, ✓ Acceptance Criteria
 
-           May I write this to design/gdd/crafting-system.md?"
+           I will write this to design/gdd/crafting-system.md."
 
-    User: "Yes, write it."  ← ONLY NOW does file get created
+    User: "Yes, write it."  ← file is now created
 
 11. AGENT WRITES FILE
     Agent: [Uses Write tool]
@@ -359,7 +359,7 @@ pattern:
 
 ❌ **Don't use it for:**
 - Open-ended discovery questions ("What excites you about roguelikes?")
-- Single yes/no confirmations ("May I write to file?")
+- Single yes/no confirmations ("routine file write")
 - When running as a Codex subagent (tool may not be available)
 
 ### Format Guidelines
@@ -452,26 +452,13 @@ Orchestrator uses request_user_input:
 
 ## 📄 File Writing Protocol
 
-### NEVER Write Files Without Explicit Approval
+### Write Agreed Work; Confirm Material Boundaries
 
-Every file write must follow:
-
-```
-1. Agent: "I've completed the [design/code/doc]. Here's a summary:
-           [Key points]
-
-           May I write this to [filepath]?"
-
-2. User: "Yes" or "No, change X first" or "Show me the full draft"
-
-3. IF User says "Yes":
-   Agent: [Uses Write/Edit tool]
-          "Written to [filepath]. Next steps?"
-
-   IF User says "No":
-   Agent: [Makes requested changes]
-          [Returns to step 1]
-```
+Routine edits, commits, pushes, and verification that implement an agreed task
+proceed directly. Summarize material changes and use coherent Git checkpoints as
+the rollback mechanism. Explicit confirmation remains appropriate for destructive
+or irreversible work, major creative/product direction or scope changes,
+releases/publishing/deployment, credentials, billing, and external services.
 
 ### Incremental Section Writing (Design Documents)
 
@@ -480,17 +467,13 @@ each section to the file as it's approved instead of building the full document
 in conversation. This prevents context overflow during long iterative sessions.
 
 ```
-1. Agent creates file with skeleton (all section headers, empty bodies)
-   Agent: "May I create design/gdd/crafting-system.md with the section skeleton?"
-   User: "Yes"
+1. Agent creates the agreed file skeleton (all section headers, empty bodies).
 
 2. For EACH section:
    Agent: [Drafts section in conversation]
    User: [Reviews, requests changes]
    Agent: [Revises until approved]
-   Agent: "May I write this section to the file?"
-   User: "Yes"
-   Agent: [Edits section into file]
+   Agent: [Edits the agreed section into the file]
    Agent: [Updates production/session-state/active.md with progress]
    ─── Context for this section can now be safely compacted ───
    ─── The decisions are IN THE FILE ───
@@ -616,7 +599,7 @@ After any agent interaction, check:
 - [ ] Did the agent ask clarifying questions?
 - [ ] Did the agent present multiple options with trade-offs?
 - [ ] Did you make the final decision?
-- [ ] Did the agent get your approval before writing files?
+- [ ] Did the agent confirm material decision boundaries?
 - [ ] Did the agent explain WHY it recommended something?
 
 If you answered "No" to any, the agent wasn't collaborative enough!
@@ -644,7 +627,7 @@ If you answered "No" to any, the agent wasn't collaborative enough!
 
 "Just do it" ← No collaboration opportunity
 
-"Implement everything in the design doc" ← No approval points
+"Implement everything in the design doc" ← Risky when material ambiguities remain
 ```
 
 ### For Agents:
@@ -663,10 +646,10 @@ WHEN proposing solutions:
 3. Reference game design theory, user's pillars, or comparable games
 4. Make a recommendation but defer final decision to user
 
-BEFORE writing files:
-1. Show draft or summary
-2. Explicitly ask: "May I write this to [file]?"
-3. Wait for "yes"
+BEFORE crossing a material decision boundary:
+1. Show the relevant proposal or summary
+2. Explain the tradeoff and recommendation
+3. Ask the user to decide
 
 WHEN implementing:
 1. Explain architectural choices
@@ -681,8 +664,8 @@ WHEN implementing:
 This principle has been fully embedded across the project:
 
 - **AGENTS.md** — Collaboration protocol section added
-- **All 48 agent definitions** — Updated to enforce question-asking and approval
-- **All skills** — Updated to require approval before writing
+- **All 48 agent definitions** — Updated for purposeful questions and review
+- **All skills** — Updated with collaborative decision boundaries
 - **WORKFLOW-GUIDE.md** — Rewritten with collaborative examples
 - **README.md** — Clarifies collaborative (not autonomous) design
 - **request_user_input tool** — Integrated into 10 skills for structured option UI

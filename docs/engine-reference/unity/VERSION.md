@@ -6,16 +6,12 @@
 | **Release Date** | December 2025 |
 | **Project Pinned** | 2026-02-13 |
 | **Last Docs Verified** | 2026-02-13 |
-| **LLM Knowledge Cutoff** | May 2025 |
 
-## Knowledge Gap Warning
+## Version Verification Policy
 
-The LLM's training data likely covers Unity up to ~2022 LTS (2022.3). The entire
-Unity 6 release series (formerly Unity 2023 Tech Stream) introduced significant
-changes that the model does NOT know about. Always cross-reference this directory
-before suggesting Unity API calls.
+Use the exact project pin. Verify version-sensitive APIs against current official documentation and keep these notes current. Do not infer reliability from model knowledge.
 
-## Post-Cutoff Version Timeline
+## Version Timeline
 
 | Version | Release | Risk Level | Key Theme |
 |---------|---------|------------|-----------|
@@ -33,7 +29,7 @@ before suggesting Unity API calls.
 - **Addressables**: Asset management workflow changes
 - **Scripting**: C# 9 support, new API patterns
 
-### New Features (Post-Cutoff)
+### New Features (Version-Specific)
 - **DOTS**: Production-ready Entity Component System (Entities 1.3+)
 - **Graphics**: Enhanced URP/HDRP pipelines, GPU Resident Drawer
 - **Multiplayer**: Netcode for GameObjects improvements

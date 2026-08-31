@@ -1,48 +1,81 @@
 # Technical Preferences
 
-<!-- Populated by $setup-engine. Updated as the user makes decisions throughout development. -->
-<!-- All agents reference this file for project-specific standards and conventions. -->
+<!-- Populated by $setup-engine. Pin exact versions in project manifests and
+lockfiles. Use N/A where a concern does not apply. -->
 
-## Engine & Language
+## Technology Stack
 
-- **Engine**: [TO BE CONFIGURED — run $setup-engine]
+- **Runtime**: [TO BE CONFIGURED]
 - **Language**: [TO BE CONFIGURED]
-- **Rendering**: [TO BE CONFIGURED]
-- **Physics**: [TO BE CONFIGURED]
+- **Client / Rendering Framework**: [TO BE CONFIGURED or N/A]
+- **Simulation Runtime**: [TO BE CONFIGURED or N/A]
+- **Server / Backend**: [TO BE CONFIGURED or N/A]
+- **Persistence / Database**: [TO BE CONFIGURED or N/A]
+- **Build Tooling**: [TO BE CONFIGURED]
+- **Testing**: [TO BE CONFIGURED]
+- **Target Platforms**: [TO BE CONFIGURED]
+- **Future Multiplayer Expected**: [YES / NO / UNDECIDED]
 
-## Naming Conventions
+## Version Policy
 
-- **Classes**: [TO BE CONFIGURED]
-- **Variables**: [TO BE CONFIGURED]
-- **Signals/Events**: [TO BE CONFIGURED]
-- **Files**: [TO BE CONFIGURED]
-- **Scenes/Prefabs**: [TO BE CONFIGURED]
-- **Constants**: [TO BE CONFIGURED]
+- Exact runtime and dependency versions: [PIN IN MANIFESTS / LOCKFILES]
+- Official documentation sources: [LINKS]
+- Version-specific project notes: [PATHS or NONE]
+- Last verified: [DATE]
 
-## Performance Budgets
+Verify version-sensitive APIs against current official documentation when the
+answer affects implementation. Record durable compatibility notes in project
+documentation. Never infer reliability from a model knowledge-cutoff estimate.
 
-- **Target Framerate**: [TO BE CONFIGURED]
-- **Frame Budget**: [TO BE CONFIGURED]
-- **Draw Calls**: [TO BE CONFIGURED]
-- **Memory Ceiling**: [TO BE CONFIGURED]
+## Architecture Boundaries
 
-## Testing
+- **Simulation ownership**: [TO BE CONFIGURED]
+- **Client / simulation boundary**: [TO BE CONFIGURED]
+- **Persistence ownership**: [TO BE CONFIGURED]
+- **Command / event / state serialization**: [TO BE CONFIGURED]
 
-- **Framework**: [TO BE CONFIGURED]
-- **Minimum Coverage**: [TO BE CONFIGURED]
-- **Required Tests**: Balance formulas, gameplay systems, networking (if applicable)
+If future multiplayer is possible, keep domain and simulation logic independent
+of presentation and networking, and make relevant commands, events, and state
+serializable. Choose deterministic, authoritative, peer-to-peer, or hybrid
+execution based on project needs; the framework does not prescribe one model.
+
+## Naming and Code Conventions
+
+- **Formatting / linting**: [TO BE CONFIGURED]
+- **Public API documentation**: [TO BE CONFIGURED]
+- **Naming**: [TO BE CONFIGURED]
+- **Error handling**: [TO BE CONFIGURED]
+
+## Measurable Budgets
+
+- **Rendering / frame time**: [TO BE CONFIGURED or N/A]
+- **Simulation tick / throughput**: [TO BE CONFIGURED or N/A]
+- **Memory / allocations**: [TO BE CONFIGURED]
+- **Network / storage**: [TO BE CONFIGURED or N/A]
+- **Worst-case entity or content scale**: [TO BE CONFIGURED]
+
+Rules enforce configured budgets, not framework-wide numeric defaults. Profile
+representative and worst-case workloads before and after optimization.
+
+## Testing Standards
+
+- **Frameworks**: [TO BE CONFIGURED]
+- **Required suites**: [TO BE CONFIGURED]
+- **Coverage / quality gates**: [TO BE CONFIGURED]
+- **Determinism / replay checks**: [TO BE CONFIGURED or N/A]
 
 ## Forbidden Patterns
 
-<!-- Add patterns that should never appear in this project's codebase -->
-- [None configured yet — add as architectural decisions are made]
+- [None configured yet]
 
 ## Allowed Libraries / Addons
 
-<!-- Add approved third-party dependencies here -->
-- [None configured yet — add as dependencies are approved]
+- [None configured yet]
 
 ## Architecture Decisions Log
 
-<!-- Quick reference linking to full ADRs in docs/architecture/ -->
-- [No ADRs yet — use $architecture-decision to create one]
+Create ADRs for significant, durable architectural choices with meaningful
+alternatives or cross-system consequences. Routine implementation does not
+require an ADR.
+
+- [No ADRs yet]

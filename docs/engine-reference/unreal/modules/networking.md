@@ -1,7 +1,7 @@
 # Unreal Engine 5.7 — Networking Module Reference
 
 **Last verified:** 2026-02-13
-**Knowledge Gap:** UE 5.7 networking improvements
+**Version note:** UE 5.7 networking improvements
 
 ---
 

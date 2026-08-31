@@ -1,0 +1,9 @@
+{
+  "sourceRoots": ["src"],
+  "designRoots": ["design/gdd"],
+  "testRoots": ["tests"],
+  "prototypeRoots": ["prototypes"],
+  "simulationRoots": ["src/sim"],
+  "architectureRoots": ["docs/architecture"],
+  "productionRoots": ["production"]
+}

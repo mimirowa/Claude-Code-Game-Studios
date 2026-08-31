@@ -6,15 +6,12 @@
 | **Release Date** | November 2025 |
 | **Project Pinned** | 2026-02-13 |
 | **Last Docs Verified** | 2026-02-13 |
-| **LLM Knowledge Cutoff** | May 2025 |
 
-## Knowledge Gap Warning
+## Version Verification Policy
 
-The LLM's training data likely covers Unreal Engine up to ~5.3. Versions 5.4, 5.5,
-5.6, and 5.7 introduced significant changes that the model does NOT know about.
-Always cross-reference this directory before suggesting Unreal API calls.
+Use the exact project pin. Verify version-sensitive APIs against current official documentation and keep these notes current. Do not infer reliability from model knowledge.
 
-## Post-Cutoff Version Timeline
+## Version Timeline
 
 | Version | Release | Risk Level | Key Theme |
 |---------|---------|------------|-----------|
@@ -32,7 +29,7 @@ Always cross-reference this directory before suggesting Unreal API calls.
 - **Animation Authoring**: New rigging and animation tools
 - **AI Assistant**: In-editor AI guidance (experimental)
 
-### New Features (Post-Cutoff)
+### New Features (Version-Specific)
 - **Megalights**: Dynamic lighting at massive scale (millions of lights)
 - **Substrate Materials**: Production-ready modular material system
 - **PCG Framework**: Procedural world generation (production-ready in 5.7)

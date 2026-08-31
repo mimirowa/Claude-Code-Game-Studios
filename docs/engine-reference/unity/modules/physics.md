@@ -1,7 +1,7 @@
 # Unity 6.3 — Physics Module Reference
 
 **Last verified:** 2026-02-13
-**Knowledge Gap:** Unity 6 physics improvements, solver changes
+**Version note:** Unity 6 physics improvements, solver changes
 
 ---
 

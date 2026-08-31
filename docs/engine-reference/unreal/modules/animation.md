@@ -1,7 +1,7 @@
 # Unreal Engine 5.7 — Animation Module Reference
 
 **Last verified:** 2026-02-13
-**Knowledge Gap:** UE 5.7 animation authoring improvements, Control Rig 2.0
+**Version note:** UE 5.7 animation authoring improvements, Control Rig 2.0
 
 ---
 

@@ -1,7 +1,7 @@
 # Unity 6.3 — Animation Module Reference
 
 **Last verified:** 2026-02-13
-**Knowledge Gap:** Unity 6 animation improvements, Timeline enhancements
+**Version note:** Unity 6 animation improvements, Timeline enhancements
 
 ---
 

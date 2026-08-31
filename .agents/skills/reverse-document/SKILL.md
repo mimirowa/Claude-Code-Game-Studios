@@ -129,7 +129,7 @@ Based on type, use appropriate template:
 - Identify **what's missing** (edge cases not handled, gaps in design)
 - Flag **follow-up work** (balance tuning, missing features)
 
-### 6. Show Draft and Request Approval
+### 6. Show Findings and Resolve Material Ambiguities
 
 **Collaborative protocol**:
 ```
@@ -146,10 +146,10 @@ SECTIONS MARKED AS INCOMPLETE:
 - "Enemy AI interaction with stagger" (not fully implemented yet)
 - "Weapon variety and scaling" (only sword implemented so far)
 
-May I write this to design/gdd/combat-system.md?
+I will write this agreed audit to the configured design root.
 ```
 
-Wait for approval. User may request changes before writing.
+Write the requested document and invite corrections after reporting the result.
 
 ### 7. Write Document with Metadata
 
@@ -227,7 +227,7 @@ User: 1. Stamina is for pacing, prevent button mashing
 Agent: Perfect, that clarifies the vision. Let me draft the design doc.
        [Shows draft with clarified intent]
 
-       May I write this to design/gdd/combat-system.md?
+       I will write this agreed audit to the configured design root.
 
 User: Yes, write it.
 
@@ -253,7 +253,7 @@ This skill follows the collaborative design principle:
 4. **User Clarifies**: Separate intent from accidents
 5. **Draft Document**: Create doc based on reality + intent
 6. **Show Draft**: Display key sections, explain additions
-7. **Get Approval**: "May I write to [filepath]?"
+7. **Write the agreed artifact**: report its path and notable assumptions
 8. **Flag Follow-Up**: Suggest related work, don't auto-execute
 
 **Never assume intent. Always ask before documenting "why".**

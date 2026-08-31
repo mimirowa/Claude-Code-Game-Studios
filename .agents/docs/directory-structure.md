@@ -1,18 +1,30 @@
 # Directory Structure
 
+The framework recommends this layout for new projects:
+
 ```text
 /
-├── AGENTS.md                    # Master configuration
-├── .agents/                     # Agent definitions, skills, hooks, rules, docs
-├── src/                         # Game source code (core, gameplay, ai, networking, ui, tools)
-├── assets/                      # Game assets (art, audio, vfx, shaders, data)
-├── design/                      # Game design documents (gdd, narrative, levels, balance)
-├── docs/                        # Technical documentation (architecture, api, postmortems)
-│   └── engine-reference/        # Curated engine API snapshots (version-pinned)
-├── tests/                       # Test suites (unit, integration, performance, playtest)
-├── tools/                       # Build and pipeline tools (ci, build, asset-pipeline)
-├── prototypes/                  # Throwaway prototypes (isolated from src/)
-└── production/                  # Production management (sprints, milestones, releases)
-    ├── session-state/           # Ephemeral session state (active.md — gitignored)
-    └── session-logs/            # Session audit trail (gitignored)
+├── AGENTS.md
+├── .agents/
+│   └── project-layout.json      # Configured roots for imported/new projects
+├── src/                         # Application/game source
+│   └── sim/                     # Optional deterministic simulation domain
+├── assets/                      # Art, audio, shaders, and data
+├── design/gdd/                  # Game/system design documents
+├── docs/architecture/           # Architecture notes and significant ADRs
+├── tests/                       # Unit, integration, scenario, and performance tests
+├── tools/                       # Build, validation, and content tooling
+├── prototypes/                  # Isolated experiments
+└── production/                  # Sprints, milestones, releases, session state
 ```
+
+## Imported and Legacy Projects
+
+Do not reorganize an existing repository merely to satisfy this template. Set
+the actual roots in `.agents/project-layout.json` and make skills, hooks, and
+audits operate on those locations. Multiple roots are supported for monorepos,
+mixed client/server projects, and separate simulation packages.
+
+Use relative repository paths without `..`. A simulation root may sit inside a
+source root or be a separate package. Project-specific AGENTS files may add
+rules for additional paths.

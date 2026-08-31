@@ -24,6 +24,16 @@
 
 ## Architecture
 
+### Future Multiplayer and Authority
+- **Expectation**: [Expected / Ruled out / Undecided]
+- **Simulation/domain ownership**: [Component]
+- **Presentation boundary**: [How clients observe/request changes]
+- **Serializable commands/events/state**: [Required now / seam only / N/A]
+- **Persistence ownership**: [Component]
+
+Keep this proportional: document seams that avoid accidental coupling, but do
+not implement networking unless it is in scope.
+
 ### System Diagram
 ```
 [ASCII diagram showing components and data flow]

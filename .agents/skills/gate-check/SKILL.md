@@ -215,7 +215,7 @@ Example: if passing the "Pre-Production → Production" gate:
 echo -n "Production" > production/stage.txt
 ```
 
-**Always ask before writing**: "Gate passed. May I update `production/stage.txt` to 'Production'?"
+When the user has asked to advance the stage and the gate passes, update `production/stage.txt`; otherwise report the recommendation without changing stage.
 
 ---
 
@@ -243,7 +243,7 @@ This skill follows the collaborative design principle:
 2. **Ask about unknowns**: Don't assume PASS for things you can't verify
 3. **Present findings**: Show the full checklist with status
 4. **User decides**: The verdict is a recommendation — the user makes the final call
-5. **Get approval**: "May I write this gate check report to production/gate-checks/?"
+5. **Persist the report**: write the agreed gate report; stage advancement remains a separate product decision
 
 **Never** block a user from advancing — the verdict is advisory. Document the risks
 and let the user decide whether to proceed despite concerns.

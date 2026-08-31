@@ -1,7 +1,7 @@
 # Unreal Engine 5.7 — Rendering Module Reference
 
 **Last verified:** 2026-02-13
-**Knowledge Gap:** UE 5.7 has Megalights, production-ready Substrate, and Lumen improvements
+**Version note:** UE 5.7 has Megalights, production-ready Substrate, and Lumen improvements
 
 ---
 

@@ -1,7 +1,7 @@
 # Unreal Engine 5.7 — Navigation Module Reference
 
 **Last verified:** 2026-02-13
-**Knowledge Gap:** UE 5.7 navigation improvements
+**Version note:** UE 5.7 navigation improvements
 
 ---
 

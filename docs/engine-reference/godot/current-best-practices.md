@@ -2,7 +2,7 @@
 
 Last verified: 2026-02-12 | Engine: Godot 4.6
 
-Practices that are **new or changed** since the model's training data (~4.3).
+Practices that are **new or changed** for the pinned version.
 This supplements (not replaces) the agent's built-in knowledge.
 
 ## GDScript (4.5+)

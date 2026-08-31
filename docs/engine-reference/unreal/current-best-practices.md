@@ -2,7 +2,7 @@
 
 **Last verified:** 2026-02-13
 
-Modern UE5 patterns that may not be in the LLM's training data.
+Modern UE5 patterns verified for the pinned version.
 These are production-ready recommendations as of UE 5.7.
 
 ---

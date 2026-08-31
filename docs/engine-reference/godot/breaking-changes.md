@@ -2,9 +2,9 @@
 
 Last verified: 2026-02-12
 
-Changes between Godot versions, focused on post-LLM-cutoff changes (4.4+).
+Changes between Godot versions, focused on version-specific changes (4.4+).
 
-## 4.5 → 4.6 (Jan 2026 — POST-CUTOFF, HIGH RISK)
+## 4.5 → 4.6 (Jan 2026 — Version-Specific, HIGH RISK)
 
 | Subsystem | Change | Details |
 |-----------|--------|---------|
@@ -22,7 +22,7 @@ Changes between Godot versions, focused on post-LLM-cutoff changes (4.4+).
 | C# | Automatic string extraction | Translation strings auto-extracted from C# code. |
 | Plugins | New EditorDock class | Specialized container for plugin docks with layout control. |
 
-## 4.4 → 4.5 (Late 2025 — POST-CUTOFF, HIGH RISK)
+## 4.4 → 4.5 (Late 2025 — Version-Specific, HIGH RISK)
 
 | Subsystem | Change | Details |
 |-----------|--------|---------|
@@ -58,7 +58,7 @@ Changes between Godot versions, focused on post-LLM-cutoff changes (4.4+).
 | GUI | `RichTextLabel.push_meta` | Added optional `tooltip` parameter |
 | GUI | `GraphEdit.connect_node` | Added optional `keep_alive` parameter |
 
-## 4.2 → 4.3 (In Training Data — LOW RISK)
+## 4.2 → 4.3 (Previously Documented — LOW RISK)
 
 | Subsystem | Change | Details |
 |-----------|--------|---------|

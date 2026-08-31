@@ -6,15 +6,12 @@
 | **Release Date** | January 2026 |
 | **Project Pinned** | 2026-02-12 |
 | **Last Docs Verified** | 2026-02-12 |
-| **LLM Knowledge Cutoff** | May 2025 |
 
-## Knowledge Gap Warning
+## Version Verification Policy
 
-The LLM's training data likely covers Godot up to ~4.3. Versions 4.4, 4.5,
-and 4.6 introduced significant changes that the model does NOT know about.
-Always cross-reference this directory before suggesting Godot API calls.
+Use the exact project pin. Verify version-sensitive APIs against current official documentation and keep these notes current. Do not infer reliability from model knowledge.
 
-## Post-Cutoff Version Timeline
+## Version Timeline
 
 | Version | Release | Risk Level | Key Theme |
 |---------|---------|------------|-----------|

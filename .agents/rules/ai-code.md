@@ -5,7 +5,8 @@ paths:
 
 # AI Code Rules
 
-- AI update budget: 2ms per frame maximum — profile to verify
+- Meet the configured AI update/throughput budget under representative and
+  worst-case agent counts; profile to verify
 - All AI parameters must be tunable from data files (behavior tree weights, perception ranges, timers)
 - AI must be debuggable: implement visualization hooks for all AI state (paths, perception cones, decision trees)
 - AI should telegraph intentions — players need time to read and react

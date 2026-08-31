@@ -5,9 +5,11 @@ paths:
 
 # Network Code Rules
 
-- Server is AUTHORITATIVE for all gameplay-critical state — never trust the client
+- Follow the project's selected authority model; validate every untrusted peer or
+  client input at its authority boundary
 - All network messages must be versioned for forward/backward compatibility
-- Client predicts locally, reconciles with server — implement rollback for mispredictions
+- Use prediction, reconciliation, rollback, lockstep, or turn-based exchange only
+  when required by the selected networking model
 - Handle disconnection, reconnection, and host migration gracefully
 - Rate-limit all network logging to prevent log flooding
 - All networked values must specify replication strategy: reliable/unreliable, frequency, interpolation
