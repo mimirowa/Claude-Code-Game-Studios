@@ -9,10 +9,9 @@
 Thumbs.db
 Desktop.ini
 
-# === Claude Code Local ===
-.claude/settings.local.json
-.claude/docs/UPGRADE-PLAN.md
-CLAUDE.local.md
+# === Codex Local ===
+.codex/*.local.toml
+.codex/UPGRADE-PLAN.md
 production/session-logs/
 production/session-state/*.md
 

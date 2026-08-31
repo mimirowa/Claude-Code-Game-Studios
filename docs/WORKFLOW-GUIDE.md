@@ -1,10 +1,10 @@
-# Claude Code Game Studios -- Complete Workflow Guide
+# Codex Game Studios -- Complete Workflow Guide
 
 > **How to go from zero to a shipped game using the Agent Architecture.**
 >
 > This guide walks you through every phase of game development using the
-> 48-agent system, 37 slash commands, and automated hooks. It assumes you
-> have Claude Code installed and are working from the project root.
+> 48-agent system, 37 repository skills, and automated hooks. It assumes you
+> have Codex installed and are working from the project root.
 
 ---
 
@@ -22,7 +22,7 @@
 10. [Phase 9: Release & Launch](#phase-9-release--launch)
 11. [Phase 10: Post-Launch & Live Ops](#phase-10-post-launch--live-ops)
 12. [Appendix A: Agent Quick-Reference](#appendix-a-agent-quick-reference)
-13. [Appendix B: Slash Command Quick-Reference](#appendix-b-slash-command-quick-reference)
+13. [Appendix B: Skill Quick-Reference](#appendix-b-skill-quick-reference)
 14. [Appendix C: Common Workflows](#appendix-c-common-workflows)
 
 ---
@@ -33,7 +33,7 @@
 
 Before you start, make sure you have:
 
-- **Claude Code** installed and working
+- **Codex** installed and working
 - **Git** with Git Bash (Windows) or standard terminal (Mac/Linux)
 - **jq** (optional but recommended -- hooks fall back to `grep` if missing)
 - **Python 3** (optional -- some hooks use it for JSON validation)
@@ -47,12 +47,12 @@ git clone <repo-url> my-game
 cd my-game
 ```
 
-### Step 0.2: Run /start (Recommended for New Users)
+### Step 0.2: Run $start (Recommended for New Users)
 
 If you're new to the project or don't yet know what game you're building:
 
 ```
-/start
+$start
 ```
 
 This guided onboarding asks where you are (no idea, vague idea, clear concept,
@@ -61,21 +61,21 @@ a game concept and engine decision.
 
 ### Step 0.3: Choose Your Engine
 
-Run `/setup-engine` in Claude Code. This is the single most important
+Run `$setup-engine` in Codex. This is the single most important
 configuration step -- it tells every agent what engine, language, and toolchain
 you're using:
 
 ```bash
-/setup-engine godot 4.6
+$setup-engine godot 4.6
 ```
 
-Or run `/setup-engine` with no arguments to get an interactive recommendation
+Or run `$setup-engine` with no arguments to get an interactive recommendation
 based on your game's needs (2D/3D, platforms, team size, language preferences).
 
-**What `/setup-engine` does:**
+**What `$setup-engine` does:**
 
-- Pins the engine and version in `CLAUDE.md`
-- Populates `.claude/docs/technical-preferences.md` with naming conventions,
+- Pins the engine and version in `AGENTS.md`
+- Populates `.agents/docs/technical-preferences.md` with naming conventions,
   performance budgets, and engine-specific defaults
 - Detects knowledge gaps (engine version newer than LLM training data) and
   fetches current docs from the web so agents suggest correct APIs
@@ -88,27 +88,27 @@ become your go-to experts. The Unity and Unreal specialists remain available
 but won't be primary.
 
 > **Manual alternative:** You can also edit the Technology Stack section in
-> `CLAUDE.md` directly if you prefer.
+> `AGENTS.md` directly if you prefer.
 
 ### Step 0.3: Verify Hooks Are Working
 
-Start a new Claude Code session. You should see output from the
+Start a new Codex session. You should see output from the
 `session-start.sh` hook:
 
 ```
-=== Claude Code Game Studios -- Session Context ===
+=== Codex Game Studios -- Session Context ===
 Branch: main
 Recent commits:
   abc1234 Initial commit
 ===================================
 ```
 
-If you see this, hooks are working. If not, check `.claude/settings.json` to
+If you see this, hooks are working. If not, check `.codex/hooks.json` to
 make sure the hook paths are correct for your OS.
 
 ### Step 0.4: Create Your Directory Structure
 
-The directories listed in `CLAUDE.md` don't all exist yet. Create them as
+The directories listed in `AGENTS.md` don't all exist yet. Create them as
 needed -- the system expects this layout:
 
 ```
@@ -157,21 +157,21 @@ production/           # Sprint plans, milestones, releases
 You go from "no idea" or "vague idea" to a structured game concept document.
 This is where you figure out **what** you're making.
 
-> **Tip:** If you ran `/start` in Phase 0 and chose Path A or B, you're already
-> here. `/start` routes you to `/brainstorm` automatically.
+> **Tip:** If you ran `$start` in Phase 0 and chose Path A or B, you're already
+> here. `$start` routes you to `$brainstorm` automatically.
 
-### Step 1.1: Brainstorm With `/brainstorm`
+### Step 1.1: Brainstorm With `$brainstorm`
 
-This is your starting point if you skipped `/start`. Run the brainstorm skill:
+This is your starting point if you skipped `$start`. Run the brainstorm skill:
 
 ```
-/brainstorm
+$brainstorm
 ```
 
 Or with a genre hint:
 
 ```
-/brainstorm roguelike deckbuilder
+$brainstorm roguelike deckbuilder
 ```
 
 **What happens:** The brainstorm skill guides you through a collaborative 6-phase
@@ -209,8 +209,8 @@ Agent: [Creates structured concept document with top ideas, target audience,
 Take the brainstorm output and formalize it. Use the **game concept template**:
 
 ```
-Ask Claude to create a game concept document using the template at
-.claude/docs/templates/game-concept.md
+Ask Codex to create a game concept document using the template at
+.agents/docs/templates/game-concept.md
 ```
 
 This template includes:
@@ -228,8 +228,8 @@ Before you go further, lock in your **game pillars** -- the 3-5 non-negotiable
 design values that guide every decision. Use the template:
 
 ```
-Ask Claude to create a game pillars document using the template at
-.claude/docs/templates/game-pillars.md
+Ask Codex to create a game pillars document using the template at
+.agents/docs/templates/game-pillars.md
 ```
 
 Example pillars:
@@ -257,7 +257,7 @@ gets coded yet -- this is pure design and architecture.
 Before writing individual GDDs, enumerate all the systems your game needs:
 
 ```
-/map-systems
+$map-systems
 ```
 
 This creates `design/gdd/systems-index.md` — a master tracking document that:
@@ -270,17 +270,17 @@ This creates `design/gdd/systems-index.md` — a master tracking document that:
 Then design each system in dependency order:
 
 ```
-/map-systems next
+$map-systems next
 ```
 
-This picks the highest-priority undesigned system and hands off to `/design-system`,
+This picks the highest-priority undesigned system and hands off to `$design-system`,
 which guides you through creating its GDD section by section. Each completed GDD
-goes through `/design-review` before the next starts.
+goes through `$design-review` before the next starts.
 
 You can also write a specific system's GDD directly:
 
 ```
-/design-system combat-system
+$design-system combat-system
 ```
 
 ### Step 2.2: Create the Game Design Document (GDD)
@@ -289,11 +289,11 @@ For each major system in your game, create a design document in `design/gdd/`.
 Use the template:
 
 ```
-Ask Claude to create a GDD using the template at
-.claude/docs/templates/game-design-document.md
+Ask Codex to create a GDD using the template at
+.agents/docs/templates/game-design-document.md
 ```
 
-**The `design-docs` rule** (`.claude/rules/design-docs.md`) requires every GDD
+**The `design-docs` rule** (`.agents/rules/design-docs.md`) requires every GDD
 to have these 8 sections:
 
 | # | Section | What Goes Here |
@@ -376,7 +376,7 @@ Agent: [Writes file]
 Before any design doc goes to programmers, run a review:
 
 ```
-/design-review design/gdd/crafting-system.md
+$design-review design/gdd/crafting-system.md
 ```
 
 **What happens:** The skill checks the document against the 8-section
@@ -400,7 +400,7 @@ If your game has story, lore, or dialogue, this is when you build it:
 3. **Character sheets** -- Use the `narrative-character-sheet.md` template
    for each major character
 
-The `narrative` rule (`.claude/rules/narrative.md`) enforces:
+The `narrative` rule (`.agents/rules/narrative.md`) enforces:
 - Lore consistency across documents
 - Canon levels (Core Canon vs Flavor vs Apocrypha)
 - Character voice profiles
@@ -411,7 +411,7 @@ The `narrative` rule (`.claude/rules/narrative.md`) enforces:
 Before coding starts, make key technical decisions:
 
 ```
-/architecture-decision "State Machine vs Behavior Tree for NPC AI"
+$architecture-decision "State Machine vs Behavior Tree for NPC AI"
 ```
 
 **What happens:** The skill guides you through creating an Architecture Decision Record:
@@ -474,8 +474,8 @@ Agent: [Creates comprehensive ADR]
 Define your project milestones using the template:
 
 ```
-Ask Claude to create a milestone definition using the template at
-.claude/docs/templates/milestone-definition.md
+Ask Codex to create a milestone definition using the template at
+.agents/docs/templates/milestone-definition.md
 ```
 
 Typical indie milestones:
@@ -508,7 +508,7 @@ Not everything needs a prototype. Prototype when:
 ### Step 3.2: Run the Prototype Skill
 
 ```
-/prototype "grappling hook movement with momentum"
+$prototype "grappling hook movement with momentum"
 ```
 
 **What happens:** The skill collaborates with you to set up the prototype:
@@ -552,7 +552,7 @@ User: "Yes"
 Agent: [Creates directory structure, README with hypothesis/criteria/status,
        delegates to prototyper agent for minimal implementation]
 
-**Key rule:** The `prototype-code` rule (`.claude/rules/prototype-code.md`)
+**Key rule:** The `prototype-code` rule (`.agents/rules/prototype-code.md`)
 intentionally relaxes coding standards for prototypes - hardcoded values OK,
 no tests required, but README with hypothesis and findings is mandatory.
 
@@ -571,7 +571,7 @@ or Kill It.
 If you had others test the prototype:
 
 ```
-/playtest-report
+$playtest-report
 ```
 
 This generates a structured report template covering:
@@ -598,7 +598,7 @@ until your game is content-complete.
 ### Step 4.1: Create Your First Sprint
 
 ```
-/sprint-plan new
+$sprint-plan new
 ```
 
 **What happens:** The skill delegates to `producer` to collaborate on sprint planning:
@@ -650,13 +650,13 @@ Agent: [Creates sprint plan with goal, categorized tasks, 20hr capacity estimate
 Each session follows this pattern:
 
 ```
-1. Start a Claude Code session
+1. Start a Codex session
    (session-start hook shows branch, sprint status, recent commits)
 
 2. Pick a task from the sprint plan
    ("I'm working on the combat damage calculation system")
 
-3. Claude identifies the right agent(s) to help
+3. Codex identifies the right agent(s) to help
    - game-designer if the design needs work
    - gameplay-programmer for implementation
    - systems-designer for formula details
@@ -679,13 +679,13 @@ Each session follows this pattern:
 Check on sprint progress anytime:
 
 ```
-/sprint-plan status
+$sprint-plan status
 ```
 
 If scope is growing:
 
 ```
-/scope-check production/sprints/sprint-03.md
+$scope-check production/sprints/sprint-03.md
 ```
 
 This compares current scope against the original plan and flags:
@@ -698,7 +698,7 @@ This compares current scope against the original plan and flags:
 At the end of a sprint:
 
 ```
-/retrospective
+$retrospective
 ```
 
 This analyzes:
@@ -712,7 +712,7 @@ This analyzes:
 Then plan the next sprint:
 
 ```
-/sprint-plan new
+$sprint-plan new
 ```
 
 The new sprint incorporates carry-over tasks, retrospective learnings, and
@@ -723,7 +723,7 @@ updated priorities.
 At milestone checkpoints:
 
 ```
-/milestone-review "alpha"
+$milestone-review "alpha"
 ```
 
 This produces a comprehensive report:
@@ -808,7 +808,7 @@ Agent: [Writes tests]
 For features that span multiple domains, use a team skill:
 
 ```
-/team-combat "healing ability with HoT (heal-over-time) and cleanse"
+$team-combat "healing ability with HoT (heal-over-time) and cleanse"
 ```
 
 **What happens:** The team skill orchestrates collaborative 6-phase development:
@@ -864,10 +864,10 @@ Agent (coordinator): "Feature complete. Status:
        Ready to merge."
 
 Other team skills work similarly:
-- `/team-narrative` -- Story content from structure to written dialogue
-- `/team-ui` -- UI feature from wireframe to polished implementation
-- `/team-level` -- Level from layout to fully dressed with encounters
-- `/team-audio` -- Audio from direction to implemented events
+- `$team-narrative` -- Story content from structure to written dialogue
+- `$team-ui` -- UI feature from wireframe to polished implementation
+- `$team-level` -- Level from layout to fully dressed with encounters
+- `$team-audio` -- Audio from direction to implemented events
 
 ### Step 5.3: AI Systems
 
@@ -943,7 +943,7 @@ Engine specialists know:
 When you face a significant technical choice during implementation:
 
 ```
-/architecture-decision "Event Bus vs Direct Signals for System Communication"
+$architecture-decision "Event Bus vs Direct Signals for System Communication"
 ```
 
 This documents the decision so future-you (or future contributors) understand
@@ -954,7 +954,7 @@ This documents the decision so future-you (or future contributors) understand
 After implementing a feature:
 
 ```
-/code-review src/gameplay/combat/damage_calculator.gd
+$code-review src/gameplay/combat/damage_calculator.gd
 ```
 
 **What happens:** The skill performs collaborative architectural review:
@@ -1009,7 +1009,7 @@ test-driven development with automated enforcement.
 The project enforces **verification-driven development**: write tests before
 or alongside implementation, not after.
 
-The `test-standards` rule (`.claude/rules/test-standards.md`) enforces:
+The `test-standards` rule (`.agents/rules/test-standards.md`) enforces:
 - Test naming: `test_[system]_[scenario]_[expected_result]`
 - Structure: Arrange / Act / Assert
 - No external state dependencies
@@ -1067,7 +1067,7 @@ Agent: [Writes tests following test-standards rule: proper naming, Arrange/Act/A
 When you find a bug:
 
 ```
-/bug-report "Healing spell applies damage instead of healing when
+$bug-report "Healing spell applies damage instead of healing when
 target has a shield buff active"
 ```
 
@@ -1141,7 +1141,7 @@ Agent: [Creates detailed test plan using test-plan.md template]
 After implementing economy or progression systems:
 
 ```
-/balance-check assets/data/combat_damage.json
+$balance-check assets/data/combat_damage.json
 ```
 
 This analyzes your balance data for:
@@ -1162,7 +1162,7 @@ performance, visual polish, audio, and feel.
 ### Step 7.1: Performance Profiling
 
 ```
-/perf-profile
+$perf-profile
 ```
 
 **What happens:** The skill guides you through structured performance profiling:
@@ -1239,7 +1239,7 @@ Agent: [Shows optimized implementation]
 Use the team polish skill for comprehensive polishing:
 
 ```
-/team-polish "combat system"
+$team-polish "combat system"
 ```
 
 **What happens:** The team polish skill coordinates collaborative polish passes:
@@ -1299,7 +1299,7 @@ Agent (coordinator): "Polish pass complete:
 ### Step 7.3: Audio Implementation
 
 ```
-/team-audio "combat audio"
+$team-audio "combat audio"
 ```
 
 **What happens:** The team audio skill coordinates the full collaborative audio pipeline:
@@ -1387,7 +1387,7 @@ Agent (coordinator): "Combat audio pipeline complete. Test in-game and provide f
 Before release, assess your tech debt:
 
 ```
-/tech-debt
+$tech-debt
 ```
 
 This scans the codebase for:
@@ -1407,7 +1407,7 @@ before release vs. what to defer.
 ### Step 8.1: Localization Scan
 
 ```
-/localize src/
+$localize src/
 ```
 
 This scans for:
@@ -1447,7 +1447,7 @@ Your game is polished, tested, and ready. Now you ship it.
 ### Step 9.1: Release Checklist
 
 ```
-/release-checklist v1.0.0
+$release-checklist v1.0.0
 ```
 
 This generates a comprehensive pre-release checklist covering:
@@ -1461,7 +1461,7 @@ This generates a comprehensive pre-release checklist covering:
 ### Step 9.2: Launch Readiness (Full Validation)
 
 ```
-/launch-checklist
+$launch-checklist
 ```
 
 This is the nuclear option -- a complete cross-department validation:
@@ -1487,7 +1487,7 @@ Each item gets a **Go / No-Go** status. All must be Go to ship.
 ### Step 9.3: Generate Player-Facing Content
 
 ```
-/patch-notes v1.0.0
+$patch-notes v1.0.0
 ```
 
 Generates player-friendly patch notes from git history and internal data.
@@ -1495,7 +1495,7 @@ Translates developer language ("refactored state machine") into player
 language ("improved enemy behavior responsiveness").
 
 ```
-/changelog v1.0.0
+$changelog v1.0.0
 ```
 
 Generates an internal changelog (more technical, for the team).
@@ -1503,7 +1503,7 @@ Generates an internal changelog (more technical, for the team).
 ### Step 9.4: Coordinate the Release
 
 ```
-/team-release
+$team-release
 ```
 
 **What happens:** The team release skill coordinates all departments for launch:
@@ -1596,7 +1596,7 @@ git push origin main --tags
 When a critical bug appears in production:
 
 ```
-/hotfix "Players losing save data when inventory exceeds 99 items"
+$hotfix "Players losing save data when inventory exceeds 99 items"
 ```
 
 This bypasses normal sprint processes with a full audit trail:
@@ -1611,8 +1611,8 @@ This bypasses normal sprint processes with a full audit trail:
 After launch dust settles:
 
 ```
-Ask Claude to create a post-mortem using the template at
-.claude/docs/templates/post-mortem.md
+Ask Codex to create a post-mortem using the template at
+.agents/docs/templates/post-mortem.md
 ```
 
 This covers:
@@ -1656,7 +1656,7 @@ and prepare a "known issues" post.
 
 | I need to... | Agent | Tier |
 |-------------|-------|------|
-| Come up with a game idea | `/brainstorm` skill | -- |
+| Come up with a game idea | `$brainstorm` skill | -- |
 | Design a game mechanic | `game-designer` | 2 |
 | Design specific formulas/numbers | `systems-designer` | 3 |
 | Design a game level | `level-designer` | 3 |
@@ -1713,22 +1713,22 @@ conflicts go to `producer`.
 
 ---
 
-## Appendix B: Slash Command Quick-Reference
+## Appendix B: Skill Quick-Reference
 
 ### By Workflow Stage
 
 | Stage | Commands |
 |-------|----------|
-| **Onboarding** | `/start` |
-| **Ideation** | `/brainstorm` |
-| **Design** | `/map-systems`, `/design-system`, `/design-review`, `/architecture-decision` |
-| **Sprint** | `/sprint-plan`, `/estimate`, `/scope-check`, `/retrospective` |
-| **Implementation** | `/code-review`, `/prototype`, `/tech-debt` |
-| **Testing** | `/balance-check`, `/playtest-report`, `/perf-profile` |
-| **Assets** | `/asset-audit`, `/localize` |
-| **Release** | `/release-checklist`, `/launch-checklist`, `/changelog`, `/patch-notes`, `/hotfix` |
-| **Production** | `/milestone-review`, `/onboard` |
-| **Teams** | `/team-combat`, `/team-narrative`, `/team-ui`, `/team-release`, `/team-polish`, `/team-audio`, `/team-level` |
+| **Onboarding** | `$start` |
+| **Ideation** | `$brainstorm` |
+| **Design** | `$map-systems`, `$design-system`, `$design-review`, `$architecture-decision` |
+| **Sprint** | `$sprint-plan`, `$estimate`, `$scope-check`, `$retrospective` |
+| **Implementation** | `$code-review`, `$prototype`, `$tech-debt` |
+| **Testing** | `$balance-check`, `$playtest-report`, `$perf-profile` |
+| **Assets** | `$asset-audit`, `$localize` |
+| **Release** | `$release-checklist`, `$launch-checklist`, `$changelog`, `$patch-notes`, `$hotfix` |
+| **Production** | `$milestone-review`, `$onboard` |
+| **Teams** | `$team-combat`, `$team-narrative`, `$team-ui`, `$team-release`, `$team-polish`, `$team-audio`, `$team-level` |
 
 ---
 
@@ -1737,24 +1737,24 @@ conflicts go to `producer`.
 ### Workflow 1: "I just started and have no game idea"
 
 ```
-1. /start (asks where you are, routes you to the right workflow)
-   — or /brainstorm if you prefer to jump straight to ideation
+1. $start (asks where you are, routes you to the right workflow)
+   — or $brainstorm if you prefer to jump straight to ideation
 2. Pick the best concept from the brainstorm output
 3. Create a game concept doc (templates/game-concept.md)
 4. Define game pillars (templates/game-pillars.md)
-5. /design-review on your concept doc
-6. /map-systems to decompose concept into systems with dependencies and priorities
-7. /design-system to author per-system GDDs (guided, section-by-section)
+5. $design-review on your concept doc
+6. $map-systems to decompose concept into systems with dependencies and priorities
+7. $design-system to author per-system GDDs (guided, section-by-section)
 ```
 
 ### Workflow 2: "I have a design and want to start coding"
 
 ```
-1. /design-review on each GDD to make sure they're solid
-2. /architecture-decision for your first major tech choice
-3. /sprint-plan new to plan your first sprint
+1. $design-review on each GDD to make sure they're solid
+2. $architecture-decision for your first major tech choice
+3. $sprint-plan new to plan your first sprint
 4. Start implementing with gameplay-programmer / engine-programmer
-5. /code-review after each major feature
+5. $code-review after each major feature
 6. Write tests alongside code
 7. Commit frequently (hooks validate automatically)
 ```
@@ -1763,62 +1763,62 @@ conflicts go to `producer`.
 
 ```
 1. Create/update the GDD for the feature in design/gdd/
-2. /design-review to validate the design
-3. /estimate to understand effort and risk
+2. $design-review to validate the design
+3. $estimate to understand effort and risk
 4. Use the appropriate /team-* skill:
-   - /team-combat for combat features
-   - /team-narrative for story content
-   - /team-ui for UI features
-   - /team-level for new levels/areas
-   - /team-audio for audio work
-5. /code-review the implementation
-6. /balance-check if it affects game balance
+   - $team-combat for combat features
+   - $team-narrative for story content
+   - $team-ui for UI features
+   - $team-level for new levels/areas
+   - $team-audio for audio work
+5. $code-review the implementation
+6. $balance-check if it affects game balance
 ```
 
 ### Workflow 4: "Something broke in production"
 
 ```
-1. /hotfix "description of the issue"
+1. $hotfix "description of the issue"
 2. Fix is implemented on hotfix branch
-3. /code-review the fix
+3. $code-review the fix
 4. Run tests
-5. /release-checklist for hotfix build
+5. $release-checklist for hotfix build
 6. Deploy and backport
 ```
 
 ### Workflow 5: "I'm approaching a milestone"
 
 ```
-1. /milestone-review to check progress
-2. /scope-check to see if scope has crept
-3. /tech-debt to assess debt before milestone
-4. /perf-profile to check performance targets
-5. /team-polish for final polish pass
-6. /release-checklist when ready to ship
+1. $milestone-review to check progress
+2. $scope-check to see if scope has crept
+3. $tech-debt to assess debt before milestone
+4. $perf-profile to check performance targets
+5. $team-polish for final polish pass
+6. $release-checklist when ready to ship
 ```
 
 ### Workflow 6: "Starting a new sprint"
 
 ```
-1. /retrospective to review the last sprint
-2. /sprint-plan new to create the next sprint
-3. /scope-check to ensure scope is manageable
+1. $retrospective to review the last sprint
+2. $sprint-plan new to create the next sprint
+3. $scope-check to ensure scope is manageable
 4. Start working through sprint tasks
-5. /sprint-plan status to check progress mid-sprint
+5. $sprint-plan status to check progress mid-sprint
 ```
 
 ### Workflow 7: "Shipping the game"
 
 ```
-1. /milestone-review for final milestone
-2. /tech-debt to decide what's acceptable at launch
-3. /localize for final localization pass
+1. $milestone-review for final milestone
+2. $tech-debt to decide what's acceptable at launch
+3. $localize for final localization pass
 4. Accessibility audit via accessibility-specialist
-5. /launch-checklist for full cross-department validation
-6. /team-release to coordinate the release
-7. /patch-notes and /changelog for player communications
+5. $launch-checklist for full cross-department validation
+6. $team-release to coordinate the release
+7. $patch-notes and $changelog for player communications
 8. Ship!
-9. /hotfix if anything breaks post-launch
+9. $hotfix if anything breaks post-launch
 10. Post-mortem after launch stabilizes
 ```
 
@@ -1831,7 +1831,7 @@ conflicts go to `producer`.
    Agents reference GDDs constantly.
 
 2. **Use team skills for cross-cutting features.** Don't try to manually
-   coordinate 4 agents yourself -- let `/team-combat`, `/team-narrative`,
+   coordinate 4 agents yourself -- let `$team-combat`, `$team-narrative`,
    etc. handle the orchestration.
 
 3. **Trust the rules system.** When a rule flags something in your code, fix
@@ -1846,16 +1846,16 @@ conflicts go to `producer`.
    shader. Don't ask `qa-tester` to make design decisions. The hierarchy
    exists for a reason.
 
-6. **Run `/design-review` before handing designs to programmers.** This
+6. **Run `$design-review` before handing designs to programmers.** This
    catches incomplete specs early, saving rework.
 
-7. **Run `/code-review` after every major feature.** Catch architectural
+7. **Run `$code-review` after every major feature.** Catch architectural
    issues before they propagate.
 
 8. **Prototype risky mechanics first.** A day of prototyping can save a week
    of production on a mechanic that doesn't work.
 
-9. **Keep your sprint plans honest.** Use `/scope-check` regularly. Scope
+9. **Keep your sprint plans honest.** Use `$scope-check` regularly. Scope
    creep is the #1 killer of indie games.
 
 10. **Document decisions with ADRs.** Future-you will thank present-you for
