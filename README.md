@@ -19,6 +19,19 @@
 
 ---
 
+> [!TIP]
+> **Using ChatGPT or Codex?** A native Codex edition is available on the
+> [`codex` branch](https://github.com/mimirowa/Claude-Code-Game-Studios/tree/codex).
+> It uses `AGENTS.md`, repository skills, custom Codex agents, and Codex
+> lifecycle hooks. Clone it directly with:
+>
+> ```bash
+> git clone --branch codex --single-branch \
+>   https://github.com/mimirowa/Claude-Code-Game-Studios.git my-game
+> ```
+
+---
+
 ## Why This Exists
 
 Building a game solo with AI is powerful — but a single chat session has no structure. No one stops you from hardcoding magic numbers, skipping design docs, or writing spaghetti code. There's no QA pass, no design review, no one asking "does this actually fit the game's vision?"
