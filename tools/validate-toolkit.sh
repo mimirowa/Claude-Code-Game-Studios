@@ -12,7 +12,7 @@ check_count() {
   fi
 }
 
-check_count "v2 skills" 27 "$(find .agents/skills -mindepth 2 -maxdepth 2 -name SKILL.md | wc -l)"
+check_count "v2 skills" 28 "$(find .agents/skills -mindepth 2 -maxdepth 2 -name SKILL.md | wc -l)"
 check_count "visible role agents" 8 "$(find .codex/agents -maxdepth 1 -name '*.toml' | wc -l)"
 check_count "preserved capabilities" 48 "$(find .codex/capabilities -maxdepth 1 -name '*.toml' | wc -l)"
 check_count "v2 rules" 6 "$(find .agents/rules -maxdepth 1 -name '*.md' | wc -l)"

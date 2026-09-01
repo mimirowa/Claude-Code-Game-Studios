@@ -29,6 +29,7 @@
 | Manage debt | `$tech-debt` | Evidence/prioritized remediation |
 | Learn from delivery | `$retrospective` | Owned process experiments |
 | Configure technology | `$setup-stack` | Pins/preferences/layout |
+| Consult detailed expertise | `$consult-capability` | Bounded evidence/review returned to owning role |
 
 Skills are workflows, not automatic authority. Executive Producer decisions and
 release/deployment boundaries in `AGENTS.md` still apply.

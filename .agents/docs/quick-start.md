@@ -14,6 +14,8 @@
 
 Persistent role threads read/write their Role Contract and canonical artifacts.
 They never rely on context hidden in another chat.
+Use `$consult-capability` when a bounded question benefits from one of the 48
+preserved detailed experts; the active role retains ownership.
 
 ## Recommended first project flow
 

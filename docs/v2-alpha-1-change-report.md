@@ -27,7 +27,8 @@ artifacts, never hidden cross-chat context.
 - Eleven canonical templates: Requirement, Feature, Blueprint, Work Order,
   Feedback, ADR, Research, Prototype Findings, Gate Review, Product Strategy,
   and Business Case.
-- Twenty-seven focused v2 skills and six active rules.
+- Twenty-eight focused v2 skills (including bounded capability consultation) and
+  six active rules.
 - `project/production/project-state.md`.
 - `tools/validate-framework.py`.
 - `legacy/v1-*` preserves non-active v1 workflows, rules, templates, and docs.
@@ -83,7 +84,7 @@ their expertise can support bounded investigation without imposing routing hops.
 
 Final validation covers:
 
-- 27 active skills, 8 visible roles, 48 preserved capabilities, 6 active rules,
+- 28 active skills, 8 visible roles, 48 preserved capabilities, 6 active rules,
   and 11 canonical templates;
 - framework name/version/status;
 - JSON and all active/capability TOML parsing;

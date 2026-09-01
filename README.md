@@ -51,7 +51,7 @@ Read:
 framework.yaml                  Framework identity/version
 AGENTS.md                       Root operating contract
 project/                        Canonical product/production artifacts
-.agents/skills/                 27 v2 workflows
+.agents/skills/                 28 v2 workflows
 .agents/rules/                  6 v2 rules
 .agents/docs/templates/         11 canonical artifact templates
 .agents/docs/role-contracts/    Persistent-role ownership contracts

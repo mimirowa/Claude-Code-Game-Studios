@@ -106,6 +106,7 @@ expected_skills = {
     "work-order", "implement", "qa-verify", "feedback", "bug-report",
     "sim-validate", "perf-profile", "gate-review", "production-plan",
     "tech-debt", "retrospective", "setup-stack",
+    "consult-capability",
 }
 if skill_names != expected_skills:
     fail(f"skill set mismatch: missing={sorted(expected_skills-skill_names)}, extra={sorted(skill_names-expected_skills)}")
