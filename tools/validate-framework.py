@@ -52,12 +52,26 @@ except Exception as exc:
     fail(f"invalid hooks JSON: {exc}")
     hooks = {}
 
-for path in (ROOT / ".codex/agents").glob("*.toml"):
+for path in list((ROOT / ".codex/agents").glob("*.toml")) + list((ROOT / ".codex/capabilities").glob("*.toml")):
     try:
         with path.open("rb") as stream:
             tomllib.load(stream)
     except Exception as exc:
         fail(f"invalid agent TOML {path.relative_to(ROOT)}: {exc}")
+
+expected_agents = {
+    "producer", "directors", "specialist-design", "specialist-tech",
+    "specialist-art", "specialist-audio", "implementer", "qa",
+}
+actual_agents = {path.stem for path in (ROOT / ".codex/agents").glob("*.toml")}
+if actual_agents != expected_agents:
+    fail(f"visible role agent mismatch: missing={sorted(expected_agents-actual_agents)}, extra={sorted(actual_agents-expected_agents)}")
+for contract in (
+    "producer", "directors", "specialist-design", "specialist-tech",
+    "specialist-art", "specialist-audio", "implementer", "qa",
+):
+    if not (ROOT / ".agents/docs/role-contracts" / f"{contract}.md").is_file():
+        fail(f"missing role contract: {contract}")
 
 skill_names: set[str] = set()
 for path in (ROOT / ".agents/skills").glob("*/SKILL.md"):
@@ -134,6 +148,16 @@ def parse_front_matter(path: Path) -> dict[str, object] | None:
         else:
             data[key] = value.strip('"')
     return data
+
+
+for path in (ROOT / ".agents/docs/templates").glob("*.md"):
+    data = parse_front_matter(path)
+    if data is None:
+        fail(f"canonical template lacks front matter: {path.relative_to(ROOT)}")
+        continue
+    missing = common_keys - data.keys()
+    if missing:
+        fail(f"template missing {sorted(missing)}: {path.relative_to(ROOT)}")
 
 
 artifact_roots = layout.get("artifactRoots", {}) if isinstance(layout, dict) else {}
