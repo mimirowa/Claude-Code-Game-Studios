@@ -1,9 +1,18 @@
 {
+  "artifactRoots": {
+    "requirements": "project/requirements",
+    "features": "project/features",
+    "blueprints": "project/blueprints",
+    "workOrders": "project/work-orders",
+    "feedback": "project/feedback",
+    "decisions": "project/decisions",
+    "production": "project/production",
+    "research": "project/research"
+  },
   "sourceRoots": ["src"],
-  "designRoots": ["design/gdd"],
   "testRoots": ["tests"],
   "prototypeRoots": ["prototypes"],
-  "simulationRoots": ["src/sim"],
-  "architectureRoots": ["docs/architecture"],
-  "productionRoots": ["production"]
+  "legacyRoots": ["legacy"],
+  "simulationRoots": [],
+  "assetRoots": ["assets"]
 }
