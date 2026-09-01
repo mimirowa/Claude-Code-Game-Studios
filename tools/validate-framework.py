@@ -46,6 +46,19 @@ except Exception as exc:
     fail(f"invalid project layout JSON: {exc}")
     layout = {}
 
+if isinstance(layout, dict):
+    configured_roots: list[str] = []
+    artifacts = layout.get("artifactRoots", {})
+    if isinstance(artifacts, dict):
+        configured_roots.extend(str(value) for value in artifacts.values())
+    for key in ("sourceRoots", "testRoots", "prototypeRoots", "legacyRoots"):
+        values = layout.get(key, [])
+        if isinstance(values, list):
+            configured_roots.extend(str(value) for value in values)
+    for root in configured_roots:
+        if not (ROOT / root).is_dir():
+            fail(f"configured root does not exist: {root}")
+
 try:
     hooks = json.loads((ROOT / ".codex/hooks.json").read_text())
 except Exception as exc:
