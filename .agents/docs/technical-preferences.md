@@ -6,14 +6,18 @@ lockfiles. Use N/A where a concern does not apply. -->
 ## Technology Stack
 
 - **Runtime**: [TO BE CONFIGURED]
-- **Language**: [TO BE CONFIGURED]
+- **Primary Language**: [TO BE CONFIGURED]
+- **Secondary Languages**: [TO BE CONFIGURED or NONE]
 - **Client / Rendering Framework**: [TO BE CONFIGURED or N/A]
 - **Simulation Runtime**: [TO BE CONFIGURED or N/A]
 - **Server / Backend**: [TO BE CONFIGURED or N/A]
 - **Persistence / Database**: [TO BE CONFIGURED or N/A]
 - **Build Tooling**: [TO BE CONFIGURED]
+- **Package Manager**: [TO BE CONFIGURED]
 - **Testing**: [TO BE CONFIGURED]
 - **Target Platforms**: [TO BE CONFIGURED]
+- **Deployment**: [TO BE CONFIGURED or N/A]
+- **Current Multiplayer Requirement**: [TO BE CONFIGURED]
 - **Future Multiplayer Expected**: [YES / NO / UNDECIDED]
 
 ## Version Policy
