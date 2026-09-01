@@ -1,80 +1,105 @@
-# Codex Game Studios
+# Structured AI Studio v2 Alpha
 
-Use this repository as a reusable game-development workspace driven by Codex.
-The user remains the creative director; Codex coordinates planning,
-implementation, review, and production support.
+This repository is the canonical memory for an artifact-driven product studio.
+Conversations operate on repository state; they are never the only place a
+decision, requirement, contract, blocker, or acceptance result exists.
 
-## Project configuration
+Framework version: `2.0.0-alpha.1` (see `framework.yaml`).
 
-Configure the project by concern rather than assuming a monolithic game engine:
+## Operating principles
 
-- Runtime: [CONFIGURE]
-- Language: [CONFIGURE]
-- Client/rendering framework: [CONFIGURE or N/A]
-- Simulation runtime: [CONFIGURE or N/A]
-- Server/backend: [CONFIGURE or N/A]
-- Persistence/database: [CONFIGURE or N/A]
-- Build tooling: [CONFIGURE]
-- Testing: [CONFIGURE]
-- Target platforms: [CONFIGURE]
+- AI makes implementation cheap; ambiguity becomes expensive.
+- Document certainty deeply. Prototype uncertainty cheaply.
+- Project phase and feature state are independent.
+- Roles provide expertise and quality filters, not simulated bureaucracy.
+- Trace work from Requirement → Feature → Blueprint → Work Order → Test →
+  Feedback, in both directions.
+- Move artifacts backward when discoveries invalidate assumptions. This is
+  product learning, not process failure.
 
-Read `.agents/docs/technical-preferences.md` and
-`.agents/project-layout.json` before making stack or path assumptions. Use
-`$setup-engine` to configure any engine, framework, custom runtime, or mixed
-stack; its historical name does not limit supported technologies.
+## Authority and autonomy
 
-## How to work
+The human user is Executive Producer and owns product vision, audience,
+commercial intent, priority and scope envelope, milestone/gate approval, and
+material product tradeoffs.
 
-- Use the relevant repository skill in `.agents/skills/` when the request
-  matches its description. `$start` is the entry point for a new or imported
-  project, while `$project-stage-detect` is preferred for existing codebases.
-- For complex work with independent tracks, delegate bounded tasks to the
-  relevant custom agents in `.codex/agents/`, then consolidate their findings.
-  Avoid parallel edits to the same files.
-- Ask focused questions when a destructive or irreversible action, major
-  product/creative direction change, scope change, release/deployment, or an
-  action involving credentials, billing, or external services genuinely needs
-  the user's decision. Normal in-scope edits, commits, pushes, and verification
-  do not require separate approval.
-- Present meaningful design alternatives with tradeoffs and a recommendation.
-- Keep design documents, implementation, and tests consistent. Record durable
-  decisions in the repository instead of relying on chat history.
-- Commit and push useful, coherent checkpoints during an agreed task so Git is
-  the rollback mechanism. Releases, publishing, and deployment still require
-  explicit confirmation.
+Normal in-scope edits, file creation, test fixes, coherent commits, and useful
+checkpoint pushes proceed without separate approval. Use meaningful commit
+messages; Git is the rollback mechanism.
 
-## Path-specific rules
+Explicit confirmation remains required for destructive or irreversible actions,
+release/publishing/deployment, credentials, billing, external-account actions,
+major product or scope changes, and anything explicitly reserved for Executive
+Producer approval.
 
-Before editing a matching path, read and follow its rule file:
+## Visible roles
 
-| Path | Rule |
-|---|---|
-| `src/gameplay/**` | `.agents/rules/gameplay-code.md` |
-| `src/core/**` | `.agents/rules/engine-code.md` |
-| configured simulation roots (default `src/sim/**`) | `.agents/rules/simulation-code.md` |
-| `src/ai/**` | `.agents/rules/ai-code.md` |
-| `src/networking/**` | `.agents/rules/network-code.md` |
-| `src/ui/**` | `.agents/rules/ui-code.md` |
-| `assets/data/**` | `.agents/rules/data-files.md` |
-| `design/gdd/**` | `.agents/rules/design-docs.md` |
-| `tests/**` | `.agents/rules/test-standards.md` |
-| `prototypes/**` | `.agents/rules/prototype-code.md` |
-| shader files | `.agents/rules/shader-code.md` |
-| narrative files | `.agents/rules/narrative.md` |
+- **Producer:** intake, status, dependencies, ownership, blockers, gates, and
+  concise reporting. Does not invent specialist solutions.
+- **Directors:** synthesized Creative, Technical, and Art review for triggered
+  high-impact work. Directors are not mandatory routing hops.
+- **Specialist Design:** player/product behavior, rules, UX, tuning intent, and
+  design acceptance criteria; does not own implementation architecture.
+- **Specialist Tech:** feasibility, architecture, state ownership, contracts,
+  performance, persistence, networking, and technical blueprints; does not
+  silently redesign product behavior.
+- **Specialist Art:** visual/readability requirements, assets, animation/VFX,
+  pipeline impact, and visual constraints.
+- **Specialist Audio:** audio/music/feedback requirements and constraints; omit
+  when audio impact is genuinely N/A.
+- **Implementer:** implements approved Work Orders, associated tests, and local
+  choices inside the contract; escalates invalid assumptions.
+- **QA:** testability review and PASS/FAIL validation against approved criteria.
+  Product quality and direction remain Executive Producer/Director judgments.
 
-General conventions live in `.agents/docs/coding-standards.md`, repository
-layout in `.agents/docs/directory-structure.md`, coordination guidance in
-`.agents/docs/coordination-rules.md`, and session continuity guidance in
-`.agents/docs/context-management.md`.
+Read the matching contract in `.agents/docs/role-contracts/` before acting as a
+persistent role. Existing detailed experts live in `.codex/capabilities/` and may
+be consulted directly for bounded research; they are capabilities, not workflow
+roles or hierarchy.
 
-The paths above are recommended defaults. Imported and legacy repositories use
-the roots in `.agents/project-layout.json`; audit them in place before proposing
-a physical reorganization.
+## State models
 
-## Collaboration principles
+Project phase is one of `CONCEPT`, `PRE_PRODUCTION`, `PRODUCTION`, `POLISH`, or
+`RELEASE`, recorded in `project/production/project-state.md`.
 
-The user owns creative and product decisions. Codex should expose assumptions,
-offer options where alternatives matter, and implement the chosen direction.
-Use `request_user_input` when available for short structured choices; otherwise
-ask concise questions in conversation. See
-`docs/COLLABORATIVE-DESIGN-PRINCIPLE.md` for the longer design protocol.
+Feature state is independent: `IDEA`, `REQUIREMENT`, `FEATURE_DESIGN`,
+`TECHNICAL_BLUEPRINT`, `TESTABILITY_REVIEW`, `READY_FOR_PRODUCTION`,
+`WORK_ORDERS`, `IMPLEMENTATION`, `QA`, or `ACCEPTED`. A feature may move backward
+at any time with the reason recorded.
+
+Rigor is `A` (critical/cross-cutting), `B` (standard), or `C` (routine). Use the
+review triggers in `docs/structured-ai-studio.md`; do not create committees for
+routine work.
+
+## Canonical artifacts
+
+Default roots are configured in `.agents/project-layout.json`:
+
+- `project/requirements/`, `features/`, `blueprints/`, `work-orders/`,
+  `feedback/`, `decisions/`, `production/`, and `research/`
+- `src/`, `tests/`, `prototypes/`, and `legacy/`
+
+Artifacts use stable IDs and YAML front matter defined in
+`.agents/docs/artifact-metadata.md`. Read parent artifacts before editing a child.
+Modify the artifact owned by the active role; use links rather than copying
+another role's content into a monolith.
+
+## Technology and project rules
+
+Read `.agents/docs/technical-preferences.md` and `.agents/project-layout.json`.
+Stacks may be web, engine-based, custom, Python, headless, mixed client/server,
+or multi-language. Pin exact versions and verify uncertain version-sensitive APIs
+against current official sources.
+
+Project-specific budgets and standards override generic examples. Simulation
+rules apply only to configured simulation roots. Capture current and future
+multiplayer expectations without prescribing an authority model.
+
+## Skills and validation
+
+Use the smallest relevant skill in `.agents/skills/`. `$start`,
+`$project-stage`, and `$project-status` are primary entry points. Persist handoffs
+as artifacts so persistent role conversations never depend on hidden chat state.
+
+Before a checkpoint, run `bash tools/validate-toolkit.sh`. Do not release or
+deploy merely because validation passes.
