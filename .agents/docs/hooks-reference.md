@@ -1,17 +1,17 @@
 # Active Hooks
 
-Hooks are configured in `.codex/hooks.json` and fire automatically:
+Hooks are configured in `.codex/hooks.json`. They preserve concise state and
+provide advisory validation; they do not create routine approval gates.
 
-| Hook | Event | Trigger | Action |
-| ---- | ----- | ------- | ------ |
-| `validate-commit.sh` | PreToolUse (Bash) | `git commit` commands | Validates design doc sections, JSON data files, hardcoded values, TODO format |
-| `validate-push.sh` | PreToolUse (Bash) | `git push` commands | Warns on pushes to protected branches (develop/main) |
-| `validate-assets.sh` | PostToolUse (Write/Edit) | Asset file changes | Checks naming conventions and JSON validity for files in `assets/` |
-| `session-start.sh` | SessionStart | Session begins | Loads sprint context, milestone, git activity; detects and previews active session state file for recovery |
-| `detect-gaps.sh` | SessionStart | Session begins | Detects fresh projects (suggests $start) and missing documentation when code/prototypes exist, suggests $reverse-document or $project-stage-detect |
-| `pre-compact.sh` | PreCompact | Context compression | Saves modified files and WIP design state to an ignored recovery snapshot |
-| `session-stop.sh` | SessionEnd | Session ends | Summarizes accomplishments and updates session log |
-| `log-agent.sh` | SubagentStart | Agent spawned | Audit trail of all subagent invocations with timestamps |
+| Hook | Event | Purpose |
+|---|---|---|
+| `session-start.sh` | SessionStart | Point to phase, objective, gate, blockers, active handoff, and recent checkpoints |
+| `detect-gaps.sh` | SessionStart | Run lightweight canonical-state/framework checks and route to `$project-status`/`$project-stage` |
+| `validate-commit.sh` | PreToolUse | Warn on invalid artifact/framework state before commits without blocking normal autonomy |
+| `validate-push.sh` | PreToolUse | Advisory warning for protected branch pushes; release/deployment authority remains separate |
+| `validate-assets.sh` | PostToolUse | Validate changed assets when relevant |
+| `pre-compact.sh` | PreCompact | Persist role/task/artifact pointers, blockers, decisions, and working files |
+| `session-stop.sh` | SessionEnd | Append a concise repository-backed session checkpoint |
+| `log-agent.sh` | SubagentStart | Record bounded role/capability consultation |
 
-Hook reference documentation: `.agents/docs/hooks-reference/`
-Hook input schema documentation: `.agents/docs/hooks-reference/hook-input-schemas.md`
+Run `bash tools/validate-toolkit.sh` for authoritative framework validation.

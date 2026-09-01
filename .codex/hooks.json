@@ -1,11 +1,11 @@
 {
-  "description": "Game-studio context and validation hooks for Codex.",
+  "description": "Structured AI Studio state recovery and artifact validation hooks for Codex.",
   "hooks": {
     "SessionStart": [
       {
         "matcher": "startup|resume|compact",
         "hooks": [
-          { "type": "command", "command": "bash \"$(git rev-parse --show-toplevel)/.codex/hooks/session-start.sh\"", "timeout": 10, "statusMessage": "Loading game-studio context", "additionalContextLimit": 5000 },
+          { "type": "command", "command": "bash \"$(git rev-parse --show-toplevel)/.codex/hooks/session-start.sh\"", "timeout": 10, "statusMessage": "Loading canonical project state", "additionalContextLimit": 3000 },
           { "type": "command", "command": "bash \"$(git rev-parse --show-toplevel)/.codex/hooks/detect-gaps.sh\"", "timeout": 10, "statusMessage": "Checking project readiness", "additionalContextLimit": 2500 }
         ]
       }

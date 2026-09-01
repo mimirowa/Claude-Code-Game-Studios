@@ -1,0 +1,232 @@
+# Game Studio Agent Architecture -- Quick Start Guide
+
+## What Is This?
+
+This is a complete Codex agent architecture for game development. It
+organizes 48 specialized AI agents as a flexible capability roster, with defined
+responsibilities and lightweight coordination guidance. It includes specialists
+for Godot, Unity, and Unreal — each with dedicated sub-specialists for
+major engine subsystems. All design agents and templates are grounded in
+established game design theory (MDA Framework, Self-Determination Theory,
+Flow State, Bartle Player Types). Use whichever engine set matches your project.
+
+## How to Use
+
+### 1. Choose an Active Role Set
+
+The main Codex session can consult any specialist directly. For the current
+stage, keep a small set of continuously active roles, consult other specialists
+for bounded needs, and reserve directors/leads for useful cross-domain or
+milestone review. See `coordination-rules.md`.
+
+### 2. Pick the Right Agent for the Job
+
+Ask yourself: "What department would handle this in a real studio?"
+
+| I need to... | Use this agent |
+|-------------|---------------|
+| Design a new mechanic | `game-designer` |
+| Write combat code | `gameplay-programmer` |
+| Create a shader | `technical-artist` |
+| Write dialogue | `writer` |
+| Plan the next sprint | `producer` |
+| Review code quality | `lead-programmer` |
+| Write test cases | `qa-tester` |
+| Design a level | `level-designer` |
+| Fix a performance problem | `performance-analyst` |
+| Set up CI/CD | `devops-engineer` |
+| Design a loot table | `economy-designer` |
+| Resolve a creative conflict | `creative-director` |
+| Make an architecture decision | `technical-director` |
+| Manage a release | `release-manager` |
+| Prepare strings for translation | `localization-lead` |
+| Test a mechanic idea quickly | `prototyper` |
+| Review code for security issues | `security-engineer` |
+| Check accessibility compliance | `accessibility-specialist` |
+| Get Unreal Engine advice | `unreal-specialist` |
+| Get Unity advice | `unity-specialist` |
+| Get Godot advice | `godot-specialist` |
+| Design GAS abilities/effects | `ue-gas-specialist` |
+| Define BP/C++ boundaries | `ue-blueprint-specialist` |
+| Implement UE replication | `ue-replication-specialist` |
+| Build UMG/CommonUI widgets | `ue-umg-specialist` |
+| Design DOTS/ECS architecture | `unity-dots-specialist` |
+| Write Unity shaders/VFX | `unity-shader-specialist` |
+| Manage Addressable assets | `unity-addressables-specialist` |
+| Build UI Toolkit/UGUI screens | `unity-ui-specialist` |
+| Write idiomatic GDScript | `godot-gdscript-specialist` |
+| Create Godot shaders | `godot-shader-specialist` |
+| Build GDExtension modules | `godot-gdextension-specialist` |
+| Plan live events and seasons | `live-ops-designer` |
+| Write patch notes for players | `community-manager` |
+| Brainstorm a new game idea | Use `$brainstorm` skill |
+
+### 3. Use Slash Commands for Common Tasks
+
+| Command | What it does |
+|---------|-------------|
+| `$start` | First-time onboarding — asks where you are, guides you to the right workflow |
+| `$design-review` | Reviews a design document |
+| `$code-review` | Reviews code for quality and architecture |
+| `$playtest-report` | Creates or analyzes playtest feedback |
+| `$balance-check` | Analyzes game balance data |
+| `$sim-validate` | Validates deterministic scenarios, replay, invariants, batches, and budgets |
+| `$sprint-plan` | Creates or updates sprint plans |
+| `$architecture-decision` | Creates an ADR |
+| `$asset-audit` | Audits assets for compliance |
+| `$milestone-review` | Reviews milestone progress |
+| `$onboard` | Generates onboarding docs for a role |
+| `$prototype` | Scaffolds a throwaway prototype |
+| `$release-checklist` | Validates pre-release checklist |
+| `$changelog` | Generates changelog from git history |
+| `$retrospective` | Runs sprint/milestone retrospective |
+| `$estimate` | Produces structured effort estimates |
+| `$hotfix` | Emergency fix with audit trail |
+| `$tech-debt` | Scan, track, and prioritize tech debt |
+| `$scope-check` | Detect scope creep against plan |
+| `$localize` | Localization scan, extract, validate |
+| `$perf-profile` | Performance profiling and bottleneck ID |
+| `$gate-check` | Validate phase readiness (PASS/CONCERNS/FAIL) |
+| `$project-stage-detect` | Analyze project state, detect stage, identify gaps |
+| `$reverse-document` | Generate design/architecture docs from existing code |
+| `$setup-engine` | Configure and pin any engine, framework, runtime, or mixed stack |
+| `$map-systems` | Decompose concept into systems, map dependencies, guide per-system GDDs |
+| `$design-system` | Guided, section-by-section GDD authoring for a single game system |
+| `$team-combat` | Orchestrate full combat team pipeline |
+| `$team-narrative` | Orchestrate full narrative team pipeline |
+| `$team-ui` | Orchestrate full UI team pipeline |
+| `$team-release` | Orchestrate full release team pipeline |
+| `$team-polish` | Orchestrate full polish team pipeline |
+| `$team-audio` | Orchestrate full audio team pipeline |
+| `$team-level` | Orchestrate full level creation pipeline |
+| `$launch-checklist` | Complete launch readiness validation |
+| `$patch-notes` | Generate player-facing patch notes |
+| `$brainstorm` | Guided game concept ideation from scratch |
+
+### 4. Use Templates for New Documents
+
+Templates are in `.agents/docs/templates/`:
+
+- `game-design-document.md` -- for new mechanics and systems
+- `architecture-decision-record.md` -- for technical decisions
+- `risk-register-entry.md` -- for new risks
+- `narrative-character-sheet.md` -- for new characters
+- `test-plan.md` -- for feature test plans
+- `sprint-plan.md` -- for sprint planning
+- `milestone-definition.md` -- for new milestones
+- `level-design-document.md` -- for new levels
+- `game-pillars.md` -- for core design pillars
+- `art-bible.md` -- for visual style reference
+- `technical-design-document.md` -- for per-system technical designs
+- `post-mortem.md` -- for project/milestone retrospectives
+- `sound-bible.md` -- for audio style reference
+- `release-checklist-template.md` -- for platform release checklists
+- `changelog-template.md` -- for player-facing patch notes
+- `release-notes.md` -- for player-facing release notes
+- `incident-response.md` -- for live incident response playbooks
+- `game-concept.md` -- for initial game concepts (MDA, SDT, Flow, Bartle)
+- `pitch-document.md` -- for pitching the game to stakeholders
+- `economy-model.md` -- for virtual economy design (sink/faucet model)
+- `faction-design.md` -- for faction identity, lore, and gameplay role
+- `systems-index.md` -- for systems decomposition and dependency mapping
+- `project-stage-report.md` -- for project stage detection output
+- `design-doc-from-implementation.md` -- for reverse-documenting existing code into GDDs
+- `architecture-doc-from-code.md` -- for reverse-documenting code into architecture docs
+- `concept-doc-from-prototype.md` -- for reverse-documenting prototypes into concept docs
+
+### 5. Follow the Coordination Rules
+
+1. Consult the closest specialist directly for bounded work.
+2. Add reviewers in proportion to cross-domain impact and risk.
+3. Use project-defined active roles and milestone reviewers.
+4. Document significant decisions and unresolved risks.
+
+## First Steps for a New Project
+
+**Don't know where to begin?** Run `$start`. It asks where you are and routes
+you to the right workflow. No assumptions about your game, engine, or experience level.
+
+If you already know what you need, jump directly to the relevant path:
+
+### Path A: "I have no idea what to build"
+
+1. **Run `$start`** (or `$brainstorm open`) — guided creative exploration:
+   what excites you, what you've played, your constraints
+   - Generates 3 concepts, helps you pick one, defines core loop and pillars
+   - Produces a game concept document and recommends an engine
+2. **Set up the engine** — Run `$setup-engine` (uses the brainstorm recommendation)
+   - Configures AGENTS.md, pins versions, and adds useful reference notes
+   - Creates `.agents/docs/technical-preferences.md` with naming conventions,
+     performance budgets, and engine-specific defaults
+   - Verifies version-sensitive APIs against current official documentation
+3. **Validate the concept** — Run `$design-review design/gdd/game-concept.md`
+4. **Decompose into systems** — Run `$map-systems` to map all systems and dependencies
+5. **Design each system** — Run `$design-system [system-name]` (or `$map-systems next`)
+   to write GDDs in dependency order
+6. **Test the core loop** — Run `$prototype [core-mechanic]`
+7. **Playtest it** — Run `$playtest-report` to validate the hypothesis
+8. **Plan the first sprint** — Run `$sprint-plan new`
+9. Start building
+
+### Path B: "I know what I want to build"
+
+If you already have a game concept and engine choice:
+
+1. **Set up the engine** — Run `$setup-engine [engine] [version]`
+   (e.g., `$setup-engine godot 4.6`) — also creates technical preferences
+2. **Write the Game Pillars** — delegate to `creative-director`
+3. **Decompose into systems** — Run `$map-systems` to enumerate systems and dependencies
+4. **Design each system** — Run `$design-system [system-name]` for GDDs in dependency order
+5. **Create the initial ADR** — Run `$architecture-decision`
+6. **Create the first milestone** in `production/milestones/`
+7. **Plan the first sprint** — Run `$sprint-plan new`
+8. Start building
+
+### Path C: "I know the game but not the engine"
+
+If you have a concept but don't know which engine fits:
+
+1. **Run `$setup-engine`** with no arguments — it will ask about your game's
+   needs (2D/3D, platforms, team size, language preferences) and recommend
+   an engine based on your answers
+2. Follow Path B from step 2 onward
+
+### Path D: "I have an existing project"
+
+If you have design docs, prototypes, or code already:
+
+1. **Run `$start`** (or `$project-stage-detect`) — analyzes what exists,
+   identifies gaps, and recommends next steps
+2. **Configure engine if needed** — Run `$setup-engine` if not yet configured
+3. **Validate phase readiness** — Run `$gate-check` to see where you stand
+4. **Plan the next sprint** — Run `$sprint-plan new`
+
+## File Structure Reference
+
+```
+AGENTS.md                          -- Master config (read this first, ~60 lines)
+.agents/
+  skills/                          -- 38 repository skills
+  rules/                           -- 12 path-specific rule files
+  docs/
+    quick-start.md                 -- This file
+    technical-preferences.md       -- Project-specific standards (populated by $setup-engine)
+    coding-standards.md            -- Coding and design doc standards
+    coordination-rules.md          -- Agent coordination rules
+    context-management.md          -- Context budgets and compaction instructions
+    review-workflow.md             -- Proportionate review process
+    directory-structure.md         -- Project directory layout
+    agent-roster.md                -- Full role capability list
+    skills-reference.md            -- All slash commands
+    rules-reference.md             -- Path-specific rules
+    hooks-reference.md             -- Active hooks
+    agent-coordination-map.md      -- Full delegation and workflow map
+    setup-requirements.md          -- System prerequisites (Git Bash, jq, Python)
+    codex-user-config-template.md  -- Personal config guidance
+    hooks-reference/               -- Hook documentation and git hook examples
+    templates/                     -- 28 document templates
+```
+
+Native custom agents and lifecycle configuration live separately under
+`.codex/agents/`, `.codex/hooks/`, `.codex/config.toml`, and
+`.codex/hooks.json`.

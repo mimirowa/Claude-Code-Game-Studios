@@ -1,43 +1,19 @@
-#!/bin/bash
-# Codex Stop hook: Log session summary when Codex finishes
-# Records what was worked on for audit trail and sprint tracking
-
-TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-SESSION_LOG_DIR="production/session-logs"
-
-mkdir -p "$SESSION_LOG_DIR" 2>/dev/null
-
-# Log recent git activity from this session (check up to 8 hours for long sessions)
-RECENT_COMMITS=$(git log --oneline --since="8 hours ago" 2>/dev/null)
-MODIFIED_FILES=$(git diff --name-only 2>/dev/null)
-
-# --- Clean up active session state on normal shutdown ---
-STATE_FILE="production/session-state/active.md"
-if [ -f "$STATE_FILE" ]; then
-    # Archive to session log before removing
-    {
-        echo "## Archived Session State: $TIMESTAMP"
-        cat "$STATE_FILE"
-        echo "---"
-        echo ""
-    } >> "$SESSION_LOG_DIR/session-log.md" 2>/dev/null
-    rm "$STATE_FILE" 2>/dev/null
-fi
-
-if [ -n "$RECENT_COMMITS" ] || [ -n "$MODIFIED_FILES" ]; then
-    {
-        echo "## Session End: $TIMESTAMP"
-        if [ -n "$RECENT_COMMITS" ]; then
-            echo "### Commits"
-            echo "$RECENT_COMMITS"
-        fi
-        if [ -n "$MODIFIED_FILES" ]; then
-            echo "### Uncommitted Changes"
-            echo "$MODIFIED_FILES"
-        fi
-        echo "---"
-        echo ""
-    } >> "$SESSION_LOG_DIR/session-log.md" 2>/dev/null
-fi
-
+#!/usr/bin/env bash
+set +e
+DIR="project/production/session-state"
+LOG="project/production/session-log.md"
+mkdir -p "$DIR"
+{
+  echo "## Session checkpoint: $(date -Iseconds)"
+  echo "- Branch: $(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+  echo "- Project state: project/production/project-state.md"
+  if [ -f "$DIR/active.md" ]; then
+    echo "- Active handoff: $DIR/active.md"
+  fi
+  echo "- Recent commits:"
+  git log --oneline --since="8 hours ago" 2>/dev/null | head -10 | sed 's/^/  - /'
+  echo "- Uncommitted files:"
+  { git diff --name-only; git ls-files --others --exclude-standard; } 2>/dev/null | sort -u | sed 's/^/  - /'
+  echo
+} >> "$LOG"
 exit 0

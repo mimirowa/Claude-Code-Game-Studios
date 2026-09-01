@@ -1,6 +1,6 @@
 #!/bin/bash
 # Codex SubagentStart hook: Log agent invocations for audit trail
-# Tracks which agents are being used and when
+# Tracks workflow roles/capabilities without treating them as a hierarchy
 #
 # Input schema (SubagentStart):
 # { "agent_id": "agent-abc123", "agent_type": "game_designer", ... }
@@ -16,10 +16,10 @@ else
 fi
 
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-SESSION_LOG_DIR="production/session-logs"
+SESSION_LOG_DIR="project/production/session-state"
 
 mkdir -p "$SESSION_LOG_DIR" 2>/dev/null
 
-echo "$TIMESTAMP | Agent invoked: $AGENT_NAME" >> "$SESSION_LOG_DIR/agent-audit.log" 2>/dev/null
+echo "$TIMESTAMP | Role/capability consulted: $AGENT_NAME" >> "$SESSION_LOG_DIR/role-audit.log" 2>/dev/null
 
 exit 0

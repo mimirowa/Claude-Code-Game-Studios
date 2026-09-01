@@ -1,6 +1,6 @@
 # Technical Preferences
 
-<!-- Populated by $setup-engine. Pin exact versions in project manifests and
+<!-- Populated by $setup-stack. Pin exact versions in project manifests and
 lockfiles. Use N/A where a concern does not apply. -->
 
 ## Technology Stack
